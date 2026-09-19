@@ -111,11 +111,12 @@ function updateMemberPortal(session) {
     showStatus(`Welcome to the warband, ${name}!`);
 
     if (discordSignIn) {
-      discordSignIn.hidden = true;
+      
+discordSignIn.style.display = "none";
     }
 
     if (discordSignOut) {
-      discordSignOut.hidden = false;
+discordSignOut.style.display = "";
     }
 
     if (loginButton) {
@@ -125,11 +126,11 @@ function updateMemberPortal(session) {
     showStatus("Sign in with Discord to enter the warband.");
 
     if (discordSignIn) {
-      discordSignIn.hidden = false;
+      discordSignIn.style.display = "";
     }
 
     if (discordSignOut) {
-      discordSignOut.hidden = true;
+discordSignOut.style.display = "none";
     }
 
     if (loginButton) {
