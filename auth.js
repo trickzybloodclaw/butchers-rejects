@@ -98,6 +98,7 @@ discordSignOut?.addEventListener("click", async () => {
 });
 
 // Update the Member Portal when authentication changes.
+
 function updateMemberPortal(session) {
   const user = session?.user;
 
@@ -110,34 +111,30 @@ function updateMemberPortal(session) {
 
     showStatus(`Welcome to the warband, ${name}!`);
 
-    if (discordSignIn) {
-      
-discordSignIn.style.display = "none";
-    }
+    discordSignIn.style.setProperty(
+      "display", "none", "important"
+    );
 
-    if (discordSignOut) {
-discordSignOut.style.display = "";
-    }
+    discordSignOut.style.setProperty(
+      "display", "inline-block", "important"
+    );
 
-    if (loginButton) {
-      loginButton.textContent = "MY ACCOUNT";
-    }
+    loginButton.textContent = "MY ACCOUNT";
+
   } else {
     showStatus("Sign in with Discord to enter the warband.");
 
-    if (discordSignIn) {
-      discordSignIn.style.display = "";
-    }
+    discordSignIn.style.setProperty(
+      "display", "inline-block", "important"
+    );
 
-    if (discordSignOut) {
-discordSignOut.style.display = "none";
-    }
+    discordSignOut.style.setProperty(
+      "display", "none", "important"
+    );
 
-    if (loginButton) {
-      loginButton.textContent = "MEMBER LOGIN";
-    }
+    loginButton.textContent = "MEMBER LOGIN";
   }
-}
+}}
 
 // Check for an existing login session.
 const { data: sessionData, error: sessionError } =
