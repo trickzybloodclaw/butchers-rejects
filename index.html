@@ -38,7 +38,7 @@
         <img
           class="cinematic-picture"
           src="images/homepage-art.png"
-          alt="The Butchers Rejects warband in a fiery fortress, with the guild crest and motto"
+          alt="The Butchers Rejects warband homepage artwork"
           fetchpriority="high"
         >
 
@@ -58,7 +58,7 @@
             aria-label="Member Login"
           ></button>
 
-          <a class="hotspot hs-apply" href="#recruit" aria-label="Answer the war drums: apply to the guild"></a>
+          <a class="hotspot hs-apply" href="#recruit" aria-label="Apply to the guild"></a>
 
           <a
             class="hotspot hs-discord"
@@ -69,11 +69,8 @@
           ></a>
 
           <a class="hotspot hs-scroll" href="#story" aria-label="Scroll to Our Warband"></a>
-          <a class="hotspot hs-dungeons" href="#story" aria-label="Dungeons"></a>
-          <a class="hotspot hs-raids" href="#story" aria-label="Raids"></a>
-          <a class="hotspot hs-questing" href="#story" aria-label="Questing"></a>
-          <a class="hotspot hs-community" href="#recruit" aria-label="Community"></a>
-          <a class="hotspot hs-horde" href="#story" aria-label="The Horde"></a>
+
+          <!-- The four information panels in the artwork are not clickable. -->
         </div>
       </div>
 
@@ -229,8 +226,7 @@
       <h2>MEET THE <em>WARBAND.</em></h2>
 
       <p class="lead">
-       No warrior stands alone. Meet the fighters who carry our banner into battle.
-        
+        The roster awaits its first warriors.
       </p>
 
       <div class="cards" id="rosterCards"></div>
@@ -320,7 +316,7 @@
   <script type="module" src="auth.js"></script>
 
   <script>
-    // Keep both Member Login buttons working, including after sign-out.
+    // Keep Member Login working, including after sign-out.
     document.addEventListener("click", function (event) {
       const button = event.target.closest(
         ".hs-login, [data-open-login], #loginBtn"
