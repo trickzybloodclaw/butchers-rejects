@@ -32,3 +32,6 @@
  .cinematic-mobile .actions{width:100%}
  .mobile-scroll{font-size:.75rem;letter-spacing:.18em;color:#e8d7b5;margin-top:15px}
 }
+button[hidden] {
+  display: none !important;
+}
