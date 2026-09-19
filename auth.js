@@ -99,15 +99,17 @@ discordSignOut?.addEventListener("click", async () => {
 
 // Update the Member Portal when authentication changes.
 
+
 function updateMemberPortal(session) {
   const user = session?.user;
-  
-const portalText = document.querySelector(
-  "#loginDialog .dialog-body > p"
-);
-const discordText = document.querySelector(
-  ".discord-login > p"
-);
+
+  const portalText = document.querySelector(
+    "#loginDialog .dialog-body > p"
+  );
+
+  const discordText = document.querySelector(
+    ".discord-login > p"
+  );
 
   if (user) {
     const name =
@@ -118,6 +120,10 @@ const discordText = document.querySelector(
 
     showStatus(`Welcome to the warband, ${name}!`);
 
+    // Hide both introductory sentences.
+    if (portalText) portalText.style.display = "none";
+    if (discordText) discordText.style.display = "none";
+
     discordSignIn.style.setProperty(
       "display", "none", "important"
     );
@@ -127,12 +133,13 @@ const discordText = document.querySelector(
     );
 
     loginButton.textContent = "MY ACCOUNT";
-    
-if (portalText) portalText.style.display = "none";
-if (discordText) discordText.style.display = "none";
 
   } else {
     showStatus("Sign in with Discord to enter the warband.");
+
+    // Show the introductory sentences again.
+    if (portalText) portalText.style.display = "";
+    if (discordText) discordText.style.display = "";
 
     discordSignIn.style.setProperty(
       "display", "inline-block", "important"
@@ -144,11 +151,7 @@ if (discordText) discordText.style.display = "none";
 
     loginButton.textContent = "MEMBER LOGIN";
   }
-}}
-
-if (portalText) portalText.style.display = "";
-if (discordText) discordText.style.display = "";
-
+}
 // Check for an existing login session.
 const { data: sessionData, error: sessionError } =
   await supabase.auth.getSession();
