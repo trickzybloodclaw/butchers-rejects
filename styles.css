@@ -368,3 +368,24 @@ button[hidden] {
     animation: none;
   }
 }
+
+/* Very subtle movement for the homepage artwork */
+.cinematic-desktop .cinematic-picture {
+  transform-origin: center;
+  animation: subtle-banner-motion 10s ease-in-out infinite;
+}
+
+@keyframes subtle-banner-motion {
+  0%, 100% {
+    transform: scale(1.008) translateX(0);
+  }
+  50% {
+    transform: scale(1.012) translateX(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-desktop .cinematic-picture {
+    animation: none;
+  }
+}
