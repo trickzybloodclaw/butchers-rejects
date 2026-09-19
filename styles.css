@@ -37,41 +37,45 @@ button[hidden] {
 }
 
 /* Hide login instructions when signed in */
-#loginDialog:has(#discordSignOut:not([style*="none"])) .dialog-body > p:first-child,
-#loginDialog:has(#discordSignOut:not([style*="none"])) .discord-login > p {
-  display: none !important;
-}
 
-.account-menu {
+/* Guild account dropdown */
+
+#guildAccountMenu {
   position: absolute;
-  right: 20px;
-  top: 70px;
+  top: 100%;
+  right: 0;
+  min-width: 180px;
+  padding: 10px;
   background: #241b16;
   border: 1px solid #8e2920;
-  padding: 12px;
-  z-index: 9999;
+  z-index: 99999;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
 
-.account-menu[hidden] {
+#guildAccountMenu[hidden] {
   display: none !important;
 }
 
-.account-signout {
+#guildAccountMenu .account-signout {
+  display: block;
+  width: 100%;
   background: #8e2920;
-  color: white;
-  border: none;
-  padding: 12px 24px;
+  color: #ffffff;
+  border: 1px solid #b53a2b;
+  padding: 12px 18px;
   cursor: pointer;
   font-weight: bold;
+  text-align: center;
 }
 
-/* Hide all Member Portal description text */
-#loginDialog .dialog-body > p:first-child,
-#loginDialog .discord-login > p {
-  display: none !important;
+#guildAccountMenu .account-signout:hover {
+  background: #b53a2b;
 }
 
-/* Hide the login status only when signed out */
-#loginDialog:has(#discordSignIn:not([style*="none"])) #authStatus {
+#nav {
+  position: relative;
+}
+
+#loginDialog .dialog-body > p:first-child {
   display: none !important;
 }
