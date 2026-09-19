@@ -17,6 +17,36 @@ const loginDialog = document.getElementById("loginDialog");
 const authArea = document.getElementById("authArea");
 const authStatus = document.getElementById("authStatus");
 
+// Create the account dropdown.
+const accountMenu = document.createElement("div");
+accountMenu.className = "account-menu";
+accountMenu.hidden = true;
+
+const accountSignOut = document.createElement("button");
+accountSignOut.type = "button";
+accountSignOut.textContent = "SIGN OUT";
+accountSignOut.className = "account-signout";
+
+accountMenu.appendChild(accountSignOut);
+loginButton?.insertAdjacentElement("afterend", accountMenu);
+
+// Toggle dropdown.
+loginButton?.addEventListener("click", () => {
+  if (loginButton.dataset.loggedIn === "true") {
+    accountMenu.hidden = !accountMenu.hidden;
+  }
+});
+
+// Sign out from dropdown.
+accountSignOut.addEventListener("click", async () => {
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    showStatus(error.message);
+  } else {
+    accountMenu.hidden = true;
+  }
+});
 // Replace the old email/password interface with Discord login.
 if (authArea) {
   authArea.hidden = false;
@@ -132,7 +162,11 @@ function updateMemberPortal(session) {
       "display", "inline-block", "important"
     );
 
-    loginButton.textContent = "MY ACCOUNT";
+loginButton.textContent = name;
+    
+loginButton.dataset.loggedIn = "true";
+    
+loginButton.dataset.loggedIn = "true";
 
   } else {
     showStatus("Sign in with Discord to enter the warband.");
@@ -149,7 +183,9 @@ function updateMemberPortal(session) {
       "display", "none", "important"
     );
 
-    loginButton.textContent = "MEMBER LOGIN";
+loginButton.textContent = "MEMBER LOGIN";
+loginButton.dataset.loggedIn = "false";
+accountMenu.hidden = true;
   }
 }
 // Check for an existing login session.
