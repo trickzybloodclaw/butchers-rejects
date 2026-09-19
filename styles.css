@@ -264,3 +264,10 @@ button[hidden] {
     animation: none;
   }
 }
+
+/* Turn off added CSS firelight and embers */
+.cinematic-desktop::before,
+.cinematic-desktop::after {
+  content: none !important;
+  animation: none !important;
+}
