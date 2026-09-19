@@ -68,7 +68,7 @@
             aria-label="Join our Discord"
           ></a>
 
-          <a class="hotspot hs-scroll" href="#story" aria-label="Scroll to Our Warband"></a>
+          <a class="hotspot hs-scroll" href="#recruit" aria-label="Scroll to Apply"></a>
 
           <!-- The four information panels in the artwork are not clickable. -->
         </div>
@@ -81,7 +81,7 @@
           alt="The Butchers Rejects Tauren guild logo"
         >
 
-        <p class="motto">>“Cast aside by the world. United beneath one banner. Unbroken by war"<</p>
+        <p class="motto">“Cast aside by the world. United beneath one banner. Unbroken by war.”</p>
 
         <div class="actions">
           <a class="btn primary" href="#recruit">ANSWER THE WAR DRUMS ↗</a>
@@ -93,13 +93,13 @@
           >JOIN OUR DISCORD ↗</a>
         </div>
 
-        <a class="mobile-scroll" href="#story">SCROLL TO APPLY ↓</a>
+        <a class="mobile-scroll" href="#recruit">SCROLL TO APPLY ↓</a>
       </div>
 
     </section>
 
     <div class="ribbon">
-    ✦ FORGED BY BATTLE ✦ BOUND BY HONOR ✦
+      ✦ FORGED BY BATTLE ✦ BOUND BY HONOR ✦
     </div>
 
     <section class="section story" id="story">
@@ -144,7 +144,7 @@
       <div>
         <p class="eyebrow">YOUR PLACE IN THE WARBAND</p>
 
-      <h2>THE DRUMS<br>OF WAR<br><em>CALL YOUR NAME.</em></h2>
+        <h2>THE DRUMS<br>OF WAR<br><em>CALL YOUR NAME.</em></h2>
 
         <p>
           Looking for a helpful, active Horde guild? Tell us a little about yourself,
@@ -226,7 +226,7 @@
       <h2>MEET THE <em>WARBAND.</em></h2>
 
       <p class="lead">
-       Meet the warriors who lead the charge beneath our banner
+        Meet the warriors who lead the charge beneath our banner
       </p>
 
       <div class="cards" id="rosterCards"></div>
@@ -335,45 +335,5 @@
     }, true);
   </script>
 
-<style>
-/* Replace the desktop scroll text */
-.cinematic-desktop {
-  position: relative;
-}
-
-.desktop-scroll-apply {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 9999;
-  background: #120e0c;
-  color: #e8d5b5;
-  padding: 8px 35px;
-  font: bold 15px Georgia, serif;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-@media (max-width: 768px) {
-  .desktop-scroll-apply {
-    display: none;
-  }
-}
-</style>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const desktop = document.querySelector(".cinematic-desktop");
-
-  if (desktop) {
-    const scroll = document.createElement("a");
-    scroll.className = "desktop-scroll-apply";
-    scroll.href = "#recruit";
-    scroll.textContent = "SCROLL TO APPLY ↓";
-    desktop.appendChild(scroll);
-  }
-});
-</script>
 </body>
 </html>
