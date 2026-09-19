@@ -271,3 +271,100 @@ button[hidden] {
   content: none !important;
   animation: none !important;
 }
+
+/* REALISTIC EMBERS — ONLY ABOVE THE TWO FIRES */
+
+/* Remove previous full-screen effects */
+.cinematic-desktop::before,
+.cinematic-desktop::after {
+  content: none !important;
+}
+
+/* Keep the artwork and clickable buttons in place */
+.cinematic-desktop {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.cinematic-desktop .cinematic-links {
+  z-index: 5;
+}
+
+/* Two narrow ember plumes */
+.cinematic-desktop .cinematic-picture {
+  position: relative;
+}
+
+.cinematic-desktop {
+  --ember-left: 16%;
+  --ember-right: 80%;
+}
+
+.cinematic-desktop .cinematic-links::before,
+.cinematic-desktop .cinematic-links::after {
+  content: "";
+  position: absolute;
+  bottom: 19%;
+  width: 8%;
+  height: 24%;
+  pointer-events: none;
+  z-index: -1;
+
+  background-image:
+    radial-gradient(circle, #fff1b9 0 1px, transparent 2px),
+    radial-gradient(circle, #ffac45 0 1.3px, transparent 2.5px),
+    radial-gradient(circle, #ff641d 0 1px, transparent 2px);
+
+  background-size: 31px 71px, 43px 97px, 57px 83px;
+  background-position: 0 0, 13px 19px, 24px 38px;
+
+  -webkit-mask-image: linear-gradient(
+    to top,
+    black 0%,
+    black 30%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to top,
+    black 0%,
+    black 30%,
+    transparent 100%
+  );
+
+  opacity: .8;
+  filter: drop-shadow(0 0 3px #ff7b20);
+  animation: fireplace-embers 5s linear infinite;
+}
+
+.cinematic-desktop .cinematic-links::before {
+  left: calc(var(--ember-left) - 4%);
+}
+
+.cinematic-desktop .cinematic-links::after {
+  left: calc(var(--ember-right) - 4%);
+  animation-delay: -2.5s;
+}
+
+@keyframes fireplace-embers {
+  0% {
+    background-position: 0 0, 13px 19px, 24px 38px;
+    opacity: .25;
+  }
+
+  35% {
+    opacity: .85;
+  }
+
+  100% {
+    background-position: 9px -150px, -6px -180px, 32px -165px;
+    opacity: .1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-desktop .cinematic-links::before,
+  .cinematic-desktop .cinematic-links::after {
+    animation: none;
+  }
+}
