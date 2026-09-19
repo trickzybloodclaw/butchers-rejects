@@ -26,15 +26,15 @@ window.GUILD_DATA = {
       image: 'images/guild-master.png'
     },
     {
-      name: 'Your Raid Leader',
+      name: 'PLACEHOLDER',
       role: 'RAID LEADER',
       className: 'Add character name & class',
       initial: 'RL',
       image: 'images/raid-leader.png'
     },
     {
-      name: 'Your Warband',
-      role: 'GUILD MEMBERS',
+      name: 'PLACEHOLDER',
+      role: 'Officer #1',
       className: 'Your warriors belong here',
       initial: '⚔',
       image: 'images/guild-members.png'
