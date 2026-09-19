@@ -1,13 +1,10 @@
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const supabaseUrl =
-  "https://tqiqzxchdeahxalsqjva.supabase.co";
-
-const supabaseKey =
-  "sb_publishable_mlgZuCn4H_xD04ZTow2AbQ_RnJFEOjm";
-
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = createClient(
+  "https://tqiqzxchdeahxalsqjva.supabase.co",
+  "sb_publishable_mlgZuCn4H_xD04ZTow2AbQ_RnJFEOjm"
+);
 
 const websiteUrl =
   "https://trickzybloodclaw.github.io/butchers-rejects/";
@@ -17,42 +14,34 @@ const loginDialog = document.getElementById("loginDialog");
 const authArea = document.getElementById("authArea");
 const authStatus = document.getElementById("authStatus");
 
-// Create the account dropdown.
+let currentUser = null;
+
+// Account dropdown
 const accountMenu = document.createElement("div");
-accountMenu.className = "account-menu";
+
+accountMenu.id = "guildAccountMenu";
 accountMenu.hidden = true;
 
-const accountSignOut = document.createElement("button");
-accountSignOut.type = "button";
-accountSignOut.textContent = "SIGN OUT";
-accountSignOut.className = "account-signout";
+accountMenu.innerHTML = `
+  <button
+    id="accountSignOut"
+    type="button"
+    class="account-signout"
+  >
+    SIGN OUT
+  </button>
+`;
 
-accountMenu.appendChild(accountSignOut);
-loginButton?.insertAdjacentElement("afterend", accountMenu);
+if (loginButton) {
+  loginButton.insertAdjacentElement("afterend", accountMenu);
+}
 
-// Toggle dropdown.
-loginButton?.addEventListener("click", () => {
-  if (loginButton.dataset.loggedIn === "true") {
-    accountMenu.hidden = !accountMenu.hidden;
-  }
-});
-
-// Sign out from dropdown.
-accountSignOut.addEventListener("click", async () => {
-  const { error } = await supabase.auth.signOut();
-
-  if (error) {
-    showStatus(error.message);
-  } else {
-    accountMenu.hidden = true;
-  }
-});
-// Replace the old email/password interface with Discord login.
+// Replace old email/password form
 if (authArea) {
   authArea.hidden = false;
+
   authArea.innerHTML = `
     <div class="discord-login">
-      <p>Enter the warband using your Discord account.</p>
 
       <button
         id="discordSignIn"
@@ -66,10 +55,10 @@ if (authArea) {
         id="discordSignOut"
         type="button"
         class="btn secondary"
-        hidden
       >
         SIGN OUT
       </button>
+
     </div>
   `;
 }
@@ -80,29 +69,99 @@ const discordSignIn =
 const discordSignOut =
   document.getElementById("discordSignOut");
 
+const accountSignOut =
+  document.getElementById("accountSignOut");
+
+const portalInstructions =
+  document.querySelector("#loginDialog .dialog-body > p");
+
+// Hide elements reliably
+function hide(element) {
+  if (!element) return;
+
+  element.hidden = true;
+
+  element.style.setProperty(
+    "display",
+    "none",
+    "important"
+  );
+}
+
+// Show elements reliably
+function show(element, display = "block") {
+  if (!element) return;
+
+  element.hidden = false;
+
+  element.style.setProperty(
+    "display",
+    display,
+    "important"
+  );
+}
+
 function showStatus(message) {
   if (authStatus) {
     authStatus.textContent = message;
   }
 }
 
-// Open the existing Member Portal.
-if (loginButton && loginDialog) {
-  loginButton.addEventListener(
-    "click",
-    (event) => {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-
-      if (!loginDialog.open) {
-        loginDialog.showModal();
-      }
-    },
-    true
-  );
+// Dropdown controls
+function closeAccountMenu() {
+  hide(accountMenu);
 }
 
-// Start Discord authentication.
+function toggleAccountMenu() {
+  if (accountMenu.hidden) {
+    show(accountMenu);
+  } else {
+    closeAccountMenu();
+  }
+}
+
+// Open login or account menu
+function handleLoginClick(event) {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+
+  if (currentUser) {
+    toggleAccountMenu();
+  } else if (loginDialog && !loginDialog.open) {
+    loginDialog.showModal();
+  }
+}
+
+// Navigation login button
+loginButton?.addEventListener(
+  "click",
+  handleLoginClick,
+  true
+);
+
+// Homepage login hotspot
+document.querySelectorAll("[data-open-login]").forEach(
+  button => {
+    button.addEventListener(
+      "click",
+      handleLoginClick,
+      true
+    );
+  }
+);
+
+// Close dropdown when clicking elsewhere
+document.addEventListener("click", event => {
+  if (
+    !accountMenu.contains(event.target) &&
+    event.target !== loginButton &&
+    !event.target.closest("[data-open-login]")
+  ) {
+    closeAccountMenu();
+  }
+});
+
+// Start Discord login
 discordSignIn?.addEventListener("click", async () => {
   showStatus("Connecting to Discord...");
 
@@ -118,77 +177,96 @@ discordSignIn?.addEventListener("click", async () => {
   }
 });
 
-// Sign out.
-discordSignOut?.addEventListener("click", async () => {
+// Sign out function
+async function signOutUser() {
   const { error } = await supabase.auth.signOut();
 
   if (error) {
     showStatus(error.message);
+    return;
   }
-});
 
-// Update the Member Portal when authentication changes.
+  closeAccountMenu();
+  updateMemberPortal(null);
+}
 
+// Sign out buttons
+discordSignOut?.addEventListener(
+  "click",
+  signOutUser
+);
 
+accountSignOut?.addEventListener(
+  "click",
+  signOutUser
+);
+
+// Update the Member Portal
 function updateMemberPortal(session) {
   const user = session?.user;
 
-  const portalText = document.querySelector(
-    "#loginDialog .dialog-body > p"
-  );
-
-  const discordText = document.querySelector(
-    ".discord-login > p"
-  );
+  currentUser = user || null;
 
   if (user) {
+
     const name =
       user.user_metadata?.full_name ||
       user.user_metadata?.name ||
       user.user_metadata?.user_name ||
       "Warrior";
 
-    showStatus(`Welcome to the warband, ${name}!`);
+    // Hide login instructions
+    hide(portalInstructions);
 
-    // Hide both introductory sentences.
-    if (portalText) portalText.style.display = "none";
-    if (discordText) discordText.style.display = "none";
+    // Hide login button
+    hide(discordSignIn);
 
-    discordSignIn.style.setProperty(
-      "display", "none", "important"
+    // Show sign out button
+    show(discordSignOut, "inline-block");
+
+    // Display Discord username
+    if (loginButton) {
+      loginButton.textContent = name;
+      loginButton.dataset.loggedIn = "true";
+      loginButton.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+    }
+
+    showStatus(
+      `Welcome to the warband, ${name}!`
     );
-
-    discordSignOut.style.setProperty(
-      "display", "inline-block", "important"
-    );
-
-loginButton.textContent = name;
-    
-loginButton.dataset.loggedIn = "true";
-    
-loginButton.dataset.loggedIn = "true";
 
   } else {
-    showStatus("Sign in with Discord to enter the warband.");
 
-    // Show the introductory sentences again.
-    if (portalText) portalText.style.display = "";
-    if (discordText) discordText.style.display = "";
+    // Hide dropdown
+    closeAccountMenu();
 
-    discordSignIn.style.setProperty(
-      "display", "inline-block", "important"
-    );
+    // Keep portal clean
+    hide(portalInstructions);
 
-    discordSignOut.style.setProperty(
-      "display", "none", "important"
-    );
+    // Show Discord login
+    show(discordSignIn, "inline-block");
 
-loginButton.textContent = "MEMBER LOGIN";
-loginButton.dataset.loggedIn = "false";
-accountMenu.hidden = true;
+    // Hide sign out
+    hide(discordSignOut);
+
+    // Restore login button
+    if (loginButton) {
+      loginButton.textContent = "MEMBER LOGIN";
+      loginButton.dataset.loggedIn = "false";
+      loginButton.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+    }
+
+    showStatus("");
   }
 }
-// Check for an existing login session.
+
+// Restore existing session
 const { data: sessionData, error: sessionError } =
   await supabase.auth.getSession();
 
@@ -198,7 +276,7 @@ if (sessionError) {
   updateMemberPortal(sessionData.session);
 }
 
-// Listen for sign-in and sign-out events.
+// Listen for authentication changes
 supabase.auth.onAuthStateChange((_event, session) => {
   updateMemberPortal(session);
 });
