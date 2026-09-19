@@ -24,9 +24,36 @@ const roster = $("rosterCards");
 if (roster) {
   (data.roster || []).forEach(m => {
     const card = safeText("article", "", "member");
+    const avatar = safeText("div", "", "avatar");
+
+    if (m.image) {
+      const img = document.createElement("img");
+      img.src = m.image;
+      img.alt = m.name || "Guild member";
+      img.loading = "lazy";
+
+      // Fit the picture inside the existing avatar square.
+      img.style.width = "100%";
+      img.style.height = "100%";
+      img.style.objectFit = "cover";
+      img.style.display = "block";
+
+      avatar.style.overflow = "hidden";
+      avatar.style.padding = "0";
+
+      // Show the initials if the picture cannot be loaded.
+      img.addEventListener("error", () => {
+        img.remove();
+        avatar.textContent = m.initial || "⚔";
+      }, { once: true });
+
+      avatar.append(img);
+    } else {
+      avatar.textContent = m.initial || "⚔";
+    }
 
     card.append(
-      safeText("div", m.initial, "avatar"),
+      avatar,
       safeText("span", m.role, "role"),
       safeText("h3", m.name),
       safeText("p", m.className)
