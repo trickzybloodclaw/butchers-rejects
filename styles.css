@@ -111,3 +111,11 @@ button[hidden] {
   background: #c85240;
   margin-bottom: 16px;
 }
+
+/* Hide the duplicate Scroll to Apply button below the artwork */
+.cinematic-desktop > .mobile-scroll,
+.cinematic-desktop > .btn,
+.cinematic-desktop > .actions,
+.cinematic-hero > .mobile-scroll {
+  display: none !important;
+}
