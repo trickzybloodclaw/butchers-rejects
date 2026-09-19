@@ -41,3 +41,26 @@ button[hidden] {
 #loginDialog:has(#discordSignOut:not([style*="none"])) .discord-login > p {
   display: none !important;
 }
+
+.account-menu {
+  position: absolute;
+  right: 20px;
+  top: 70px;
+  background: #241b16;
+  border: 1px solid #8e2920;
+  padding: 12px;
+  z-index: 9999;
+}
+
+.account-menu[hidden] {
+  display: none !important;
+}
+
+.account-signout {
+  background: #8e2920;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-weight: bold;
+}
