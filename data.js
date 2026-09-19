@@ -2,8 +2,8 @@
 window.GUILD_DATA = {
   roster: [
     {name:'Your Guild Master',role:'GUILD MASTER',className:'Add character name & class',initial:'GM'},
-    {name:'Your Raid Leader',role:'RAID LEADER',className:'Add character name & class',initial:'RL'},
-    {name:'Your Warband',role:'GUILD MEMBERS',className:'Your warriors belong here',initial:'⚔'}
+    {name:'PLACEHOLDER',role:'RAID LEADER',className:'Add character name & class',initial:'RL'},
+    {name:'PLACEHOLDER',role:'OFFICER #1',className:'Your warriors belong here',initial:'⚔'}
   ],
   news: [
     {date:'GUILD ANNOUNCEMENT',title:'The warband is recruiting',body:'Join us for dungeons, raids, questing, and endless carnage. Enter our Discord to meet the guild.'},
