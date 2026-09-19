@@ -101,6 +101,13 @@ discordSignOut?.addEventListener("click", async () => {
 
 function updateMemberPortal(session) {
   const user = session?.user;
+  
+const portalText = document.querySelector(
+  "#loginDialog .dialog-body > p"
+);
+const discordText = document.querySelector(
+  ".discord-login > p"
+);
 
   if (user) {
     const name =
@@ -120,6 +127,9 @@ function updateMemberPortal(session) {
     );
 
     loginButton.textContent = "MY ACCOUNT";
+    
+if (portalText) portalText.style.display = "none";
+if (discordText) discordText.style.display = "none";
 
   } else {
     showStatus("Sign in with Discord to enter the warband.");
@@ -135,6 +145,9 @@ function updateMemberPortal(session) {
     loginButton.textContent = "MEMBER LOGIN";
   }
 }}
+
+if (portalText) portalText.style.display = "";
+if (discordText) discordText.style.display = "";
 
 // Check for an existing login session.
 const { data: sessionData, error: sessionError } =
