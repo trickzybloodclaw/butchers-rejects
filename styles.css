@@ -35,3 +35,9 @@
 button[hidden] {
   display: none !important;
 }
+
+/* Hide login instructions when signed in */
+#loginDialog:has(#discordSignOut:not([style*="none"])) .dialog-body > p:first-child,
+#loginDialog:has(#discordSignOut:not([style*="none"])) .discord-login > p {
+  display: none !important;
+}
