@@ -19,6 +19,7 @@ const authStatus = document.getElementById("authStatus");
 
 // Replace the old email/password interface with Discord login.
 if (authArea) {
+  authArea.hidden = false;
   authArea.innerHTML = `
     <div class="discord-login">
       <p>Enter the warband using your Discord account.</p>
