@@ -119,3 +119,15 @@ button[hidden] {
 .cinematic-hero > .mobile-scroll {
   display: none !important;
 }
+
+/* Bigger roster pictures */
+#roster .member .avatar {
+  width: 110px !important;
+  height: 110px !important;
+}
+
+#roster .member .avatar img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
