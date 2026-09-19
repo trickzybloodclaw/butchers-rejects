@@ -3,5 +3,21 @@
 <script src="data.js"></script>
 <script type="module" src="app.js"></script>
 <script type="module" src="auth.js"></script>
+  
+<script>
+document.addEventListener("click", function(event) {
+  const button = event.target.closest(".hs-login, [data-open-login], #loginBtn");
+
+  if (!button) return;
+
+  event.preventDefault();
+
+  const dialog = document.getElementById("loginDialog");
+
+  if (dialog && !dialog.open) {
+    dialog.showModal();
+  }
+}, true);
+</script>
 </body>
 </html>
