@@ -92,3 +92,22 @@ button[hidden] {
   font-weight: 500;
   line-height: 1.5;
 }
+
+/* Warband heading and caption */
+#roster .lead {
+  text-align: left !important;
+  margin: 16px 0 0 !important;
+  max-width: none !important;
+  color: #f2e4ca !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+}
+
+#roster .lead::before {
+  content: "";
+  display: block;
+  width: 54px;
+  height: 3px;
+  background: #c85240;
+  margin-bottom: 16px;
+}
