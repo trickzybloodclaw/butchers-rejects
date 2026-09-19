@@ -151,3 +151,58 @@ button[hidden] {
   object-fit: cover !important;
   display: block !important;
 }
+
+/* IMPROVED HOMEPAGE FIRE + EMBERS */
+
+/* Replace the previous full-screen ember effect */
+.cinematic-desktop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(circle, #ffd98b 0 1px, transparent 2px),
+    radial-gradient(circle, #ff8a28 0 1.5px, transparent 3px),
+    radial-gradient(circle, #ffcf75 0 1px, transparent 2px);
+
+  background-size:
+    37px 83px,
+    61px 117px,
+    47px 101px;
+
+  background-position:
+    0 0,
+    14px 22px,
+    27px 49px;
+
+  /* Keep sparks around the left and right fires */
+  mask-image:
+    radial-gradient(ellipse 12% 27% at 18% 78%, black 10%, transparent 100%),
+    radial-gradient(ellipse 12% 27% at 80% 78%, black 10%, transparent 100%);
+
+  opacity: .8;
+  filter: drop-shadow(0 0 3px #ff6a00);
+  animation: warcamp-real-embers 6s linear infinite;
+}
+
+@keyframes warcamp-real-embers {
+  0% {
+    background-position: 0 0, 14px 22px, 27px 49px;
+    opacity: .35;
+  }
+  50% {
+    opacity: .9;
+  }
+  100% {
+    background-position: 13px -220px, -9px -175px, 40px -200px;
+    opacity: .35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-desktop::after {
+    animation: none;
+  }
+}
