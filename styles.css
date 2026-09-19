@@ -64,3 +64,14 @@ button[hidden] {
   cursor: pointer;
   font-weight: bold;
 }
+
+/* Hide all Member Portal description text */
+#loginDialog .dialog-body > p:first-child,
+#loginDialog .discord-login > p {
+  display: none !important;
+}
+
+/* Hide the login status only when signed out */
+#loginDialog:has(#discordSignIn:not([style*="none"])) #authStatus {
+  display: none !important;
+}
