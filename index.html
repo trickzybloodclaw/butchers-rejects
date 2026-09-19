@@ -335,5 +335,45 @@
     }, true);
   </script>
 
+<style>
+/* Replace the desktop scroll text */
+.cinematic-desktop {
+  position: relative;
+}
+
+.desktop-scroll-apply {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  background: #120e0c;
+  color: #e8d5b5;
+  padding: 8px 35px;
+  font: bold 15px Georgia, serif;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .desktop-scroll-apply {
+    display: none;
+  }
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const desktop = document.querySelector(".cinematic-desktop");
+
+  if (desktop) {
+    const scroll = document.createElement("a");
+    scroll.className = "desktop-scroll-apply";
+    scroll.href = "#recruit";
+    scroll.textContent = "SCROLL TO APPLY ↓";
+    desktop.appendChild(scroll);
+  }
+});
+</script>
 </body>
 </html>
