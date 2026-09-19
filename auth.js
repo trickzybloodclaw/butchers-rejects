@@ -1,10 +1,13 @@
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const supabase = createClient(
-  "https://tqiqzxchdeahxalsqjva.supabase.co",
-  "sb_publishable_mlgZuCn4H_xD04ZTow2AbQ_RnJFEOjm"
-);
+const supabaseUrl =
+  "https://tqiqzxchdeahxalsqjva.supabase.co";
+
+const supabaseKey =
+  "sb_publishable_mlgZuCn4H_xD04ZTow2AbQ_RnJFEOjm";
+
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const websiteUrl =
   "https://trickzybloodclaw.github.io/butchers-rejects/";
@@ -16,27 +19,7 @@ const authStatus = document.getElementById("authStatus");
 
 let currentUser = null;
 
-// Account dropdown
-const accountMenu = document.createElement("div");
-
-accountMenu.id = "guildAccountMenu";
-accountMenu.hidden = true;
-
-accountMenu.innerHTML = `
-  <button
-    id="accountSignOut"
-    type="button"
-    class="account-signout"
-  >
-    SIGN OUT
-  </button>
-`;
-
-if (loginButton) {
-  loginButton.insertAdjacentElement("afterend", accountMenu);
-}
-
-// Replace old email/password form
+// Create the Discord login interface.
 if (authArea) {
   authArea.hidden = false;
 
@@ -55,6 +38,7 @@ if (authArea) {
         id="discordSignOut"
         type="button"
         class="btn secondary"
+        hidden
       >
         SIGN OUT
       </button>
@@ -69,37 +53,9 @@ const discordSignIn =
 const discordSignOut =
   document.getElementById("discordSignOut");
 
-const accountSignOut =
-  document.getElementById("accountSignOut");
-
-const portalInstructions =
-  document.querySelector("#loginDialog .dialog-body > p");
-
-// Hide elements reliably
-function hide(element) {
-  if (!element) return;
-
-  element.hidden = true;
-
-  element.style.setProperty(
-    "display",
-    "none",
-    "important"
-  );
-}
-
-// Show elements reliably
-function show(element, display = "block") {
-  if (!element) return;
-
-  element.hidden = false;
-
-  element.style.setProperty(
-    "display",
-    display,
-    "important"
-  );
-}
+const portalText = document.querySelector(
+  "#loginDialog .dialog-body > p"
+);
 
 function showStatus(message) {
   if (authStatus) {
@@ -107,61 +63,37 @@ function showStatus(message) {
   }
 }
 
-// Dropdown controls
-function closeAccountMenu() {
-  hide(accountMenu);
-}
-
-function toggleAccountMenu() {
-  if (accountMenu.hidden) {
-    show(accountMenu);
-  } else {
-    closeAccountMenu();
-  }
-}
-
-// Open login or account menu
-function handleLoginClick(event) {
+// Open the Member Portal.
+function openMemberPortal(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
 
-  if (currentUser) {
-    toggleAccountMenu();
-  } else if (loginDialog && !loginDialog.open) {
+  if (loginDialog && !loginDialog.open) {
     loginDialog.showModal();
   }
 }
 
-// Navigation login button
-loginButton?.addEventListener(
-  "click",
-  handleLoginClick,
-  true
-);
+// Main navigation login button.
+if (loginButton) {
+  loginButton.addEventListener(
+    "click",
+    openMemberPortal,
+    true
+  );
+}
 
-// Homepage login hotspot
+// Homepage login hotspot.
 document.querySelectorAll("[data-open-login]").forEach(
   button => {
     button.addEventListener(
       "click",
-      handleLoginClick,
+      openMemberPortal,
       true
     );
   }
 );
 
-// Close dropdown when clicking elsewhere
-document.addEventListener("click", event => {
-  if (
-    !accountMenu.contains(event.target) &&
-    event.target !== loginButton &&
-    !event.target.closest("[data-open-login]")
-  ) {
-    closeAccountMenu();
-  }
-});
-
-// Start Discord login
+// Start Discord login.
 discordSignIn?.addEventListener("click", async () => {
   showStatus("Connecting to Discord...");
 
@@ -177,8 +109,9 @@ discordSignIn?.addEventListener("click", async () => {
   }
 });
 
-// Sign out function
-async function signOutUser() {
+// Sign out and refresh the website.
+discordSignOut?.addEventListener("click", async () => {
+
   const { error } = await supabase.auth.signOut();
 
   if (error) {
@@ -186,23 +119,22 @@ async function signOutUser() {
     return;
   }
 
-  closeAccountMenu();
+  currentUser = null;
+
   updateMemberPortal(null);
-}
 
-// Sign out buttons
-discordSignOut?.addEventListener(
-  "click",
-  signOutUser
-);
+  if (loginDialog?.open) {
+    loginDialog.close();
+  }
 
-accountSignOut?.addEventListener(
-  "click",
-  signOutUser
-);
+  // Refresh automatically so the login button works again.
+  window.location.reload();
 
-// Update the Member Portal
+});
+
+// Update the Member Portal.
 function updateMemberPortal(session) {
+
   const user = session?.user;
 
   currentUser = user || null;
@@ -215,58 +147,60 @@ function updateMemberPortal(session) {
       user.user_metadata?.user_name ||
       "Warrior";
 
-    // Hide login instructions
-    hide(portalInstructions);
+    showStatus(`Welcome to the warband, ${name}!`);
 
-    // Hide login button
-    hide(discordSignIn);
-
-    // Show sign out button
-    show(discordSignOut, "inline-block");
-
-    // Display Discord username
-    if (loginButton) {
-      loginButton.textContent = name;
-      loginButton.dataset.loggedIn = "true";
-      loginButton.setAttribute(
-        "aria-expanded",
-        "false"
-      );
+    // Hide introductory login text.
+    if (portalText) {
+      portalText.style.display = "none";
     }
 
-    showStatus(
-      `Welcome to the warband, ${name}!`
-    );
+    // Hide Discord login button.
+    if (discordSignIn) {
+      discordSignIn.hidden = true;
+      discordSignIn.style.display = "none";
+    }
+
+    // Show sign out button.
+    if (discordSignOut) {
+      discordSignOut.hidden = false;
+      discordSignOut.style.display = "inline-block";
+    }
+
+    // Display the player's username.
+    if (loginButton) {
+      loginButton.textContent = name;
+    }
 
   } else {
 
-    // Hide dropdown
-    closeAccountMenu();
+    showStatus("");
 
-    // Keep portal clean
-    hide(portalInstructions);
-
-    // Show Discord login
-    show(discordSignIn, "inline-block");
-
-    // Hide sign out
-    hide(discordSignOut);
-
-    // Restore login button
-    if (loginButton) {
-      loginButton.textContent = "MEMBER LOGIN";
-      loginButton.dataset.loggedIn = "false";
-      loginButton.setAttribute(
-        "aria-expanded",
-        "false"
-      );
+    // Keep unnecessary text hidden.
+    if (portalText) {
+      portalText.style.display = "none";
     }
 
-    showStatus("");
+    // Show Discord login.
+    if (discordSignIn) {
+      discordSignIn.hidden = false;
+      discordSignIn.style.display = "inline-block";
+    }
+
+    // Hide sign out.
+    if (discordSignOut) {
+      discordSignOut.hidden = true;
+      discordSignOut.style.display = "none";
+    }
+
+    // Restore member login button.
+    if (loginButton) {
+      loginButton.textContent = "MEMBER LOGIN";
+    }
+
   }
 }
 
-// Restore existing session
+// Restore existing login session.
 const { data: sessionData, error: sessionError } =
   await supabase.auth.getSession();
 
@@ -276,7 +210,7 @@ if (sessionError) {
   updateMemberPortal(sessionData.session);
 }
 
-// Listen for authentication changes
+// Listen for authentication changes.
 supabase.auth.onAuthStateChange((_event, session) => {
   updateMemberPortal(session);
 });
