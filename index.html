@@ -4541,5 +4541,32 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 }
 </style>
+<script>
+/* REMOVE YOUR PLACE IN THE WARBAND */
+
+(function () {
+    function removeWarbandText() {
+        document.querySelectorAll("p, span, div").forEach(function(el) {
+            if (
+                el.children.length === 0 &&
+                el.textContent.trim().toUpperCase() ===
+                "YOUR PLACE IN THE WARBAND"
+            ) {
+                el.style.setProperty(
+                    "display", "none", "important"
+                );
+            }
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded", removeWarbandText
+        );
+    } else {
+        removeWarbandText();
+    }
+})();
+</script>
 </body>
 </html>
