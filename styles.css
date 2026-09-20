@@ -943,3 +943,160 @@ button[hidden] {
   }
 
 }
+
+/* =========================================
+   THE BUTCHERS REJECTS
+   FINAL MOBILE HOMEPAGE FIX
+   Desktop remains unchanged
+========================================= */
+
+@media screen and (max-width: 850px) {
+
+  /* Keep the mobile header */
+  .cinematic-site > .top {
+    display: flex !important;
+  }
+
+  /* Hide desktop video and old mobile video */
+  .cinematic-desktop,
+  .mobile-background-video,
+  .cinematic-mobile .mobile-crest {
+    display: none !important;
+  }
+
+  /* Reset homepage container */
+  .cinematic-site .cinematic-hero {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    background: #110e0c !important;
+  }
+
+  /* Remove old overlay */
+  .cinematic-site .cinematic-hero::after {
+    display: none !important;
+  }
+
+  /* Mobile layout */
+  .cinematic-site .cinematic-mobile {
+    display: flex !important;
+    position: relative !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 18px 35px !important;
+    gap: 0 !important;
+
+    background: none !important;
+    overflow: visible !important;
+  }
+
+  /* FULL ARTWORK ABOVE BUTTONS */
+  .cinematic-site .cinematic-mobile::before {
+    content: "" !important;
+    display: block !important;
+
+    width: calc(100% + 36px) !important;
+    height: auto !important;
+    aspect-ratio: 9 / 16 !important;
+    flex: 0 0 auto !important;
+
+    margin: 0 -18px 0 !important;
+    padding: 0 !important;
+
+    background-image: url("images/guild-mobile.png") !important;
+    background-size: contain !important;
+    background-position: center top !important;
+    background-repeat: no-repeat !important;
+    background-color: #110e0c !important;
+  }
+
+  /* Hide duplicate motto printed on artwork */
+  .cinematic-site .cinematic-mobile .motto {
+    display: none !important;
+  }
+
+  /* REAL BUTTONS BELOW THE IMAGE */
+  .cinematic-site .cinematic-mobile .actions {
+    display: flex !important;
+    position: relative !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+
+    width: 100% !important;
+    max-width: 420px !important;
+
+    margin: 24px auto 0 !important;
+    padding: 0 !important;
+    gap: 14px !important;
+
+    z-index: 2 !important;
+    transform: none !important;
+  }
+
+  /* Recruitment and Discord buttons */
+  .cinematic-site .cinematic-mobile .actions .btn {
+    display: flex !important;
+    position: relative !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 100% !important;
+    min-height: 56px !important;
+
+    margin: 0 !important;
+    padding: 14px 12px !important;
+
+    font-size: clamp(11px, 3vw, 14px) !important;
+    line-height: 1.4 !important;
+    text-align: center !important;
+
+    white-space: normal !important;
+    transform: none !important;
+  }
+
+  /* Scroll to Apply */
+  .cinematic-site .cinematic-mobile .mobile-scroll {
+    display: block !important;
+    position: relative !important;
+
+    width: 100% !important;
+    margin: 25px auto 0 !important;
+    padding: 0 !important;
+
+    font-size: 12px !important;
+    text-align: center !important;
+    letter-spacing: 2px !important;
+    line-height: 1.6 !important;
+
+    transform: none !important;
+  }
+
+  /* Keep everything below the homepage neat */
+  .ribbon {
+    position: relative !important;
+    margin: 0 !important;
+    padding: 18px 12px !important;
+    text-align: center !important;
+    line-height: 1.8 !important;
+  }
+
+  html,
+  body {
+    max-width: 100% !important;
+    overflow-x: clip !important;
+  }
+
+}
