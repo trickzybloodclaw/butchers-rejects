@@ -152,3 +152,18 @@ button[hidden] {
   display: block !important;
 }
 
+/* Keep the homepage video securely positioned */
+.cinematic-desktop {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.cinematic-desktop video.cinematic-picture {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
+  pointer-events: none !important;
+}
