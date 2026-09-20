@@ -1519,3 +1519,20 @@ button[hidden] {
 .calendar-section iframe {
     border: 2px solid #806044 !important;
 }
+/* REMOVE EXTRA ORANGE FRAME GLOW */
+
+#guild-calendar .war-frame::before,
+#guild-calendar .war-frame::after {
+    content: none !important;
+}
+
+/* Keep clean bronze and gold trim */
+#guild-calendar .war-frame {
+    border: 3px solid #b87940 !important;
+
+    box-shadow:
+        0 0 0 2px #21120a,
+        0 0 0 4px #8c502b,
+        0 0 0 5px #d49a58,
+        0 12px 35px rgba(0,0,0,0.7) !important;
+}
