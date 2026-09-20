@@ -2820,5 +2820,111 @@ body.cinematic-site .story > p:not(.eyebrow):not(.lead) {
     }
 }
 </style>
+<!-- FIX GUILD CALENDAR MONTH DROPDOWN -->
+
+<style>
+#guild-calendar .war-view-select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+
+    background: linear-gradient(
+        180deg,
+        #2a1b12,
+        #100b08
+    ) !important;
+
+    color: #f2dfc0 !important;
+    border: 1px solid #a36536 !important;
+    border-radius: 4px !important;
+
+    padding: 12px 32px 12px 15px !important;
+
+    font-family: Georgia, serif !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+
+    cursor: pointer !important;
+}
+
+#guild-calendar .war-view-select option {
+    background: #1a100b;
+    color: #f2dfc0;
+}
+</style>
+
+<script>
+(function () {
+
+    function fixWarCalendarDropdown() {
+
+        const calendar =
+            document.getElementById("guild-calendar");
+
+        if (!calendar) return;
+
+        const toolbar =
+            calendar.querySelector(".war-toolbar");
+
+        if (!toolbar) return;
+
+        const controls =
+            toolbar.querySelectorAll(".war-controls");
+
+        if (!controls.length) return;
+
+        const container =
+            controls[controls.length - 1];
+
+        container.innerHTML = `
+            <select
+                id="warViewSelect"
+                class="war-view-select"
+                aria-label="Calendar view"
+            >
+                <option value="MONTH">MONTH</option>
+                <option value="WEEK">WEEK</option>
+                <option value="DAY">DAY</option>
+            </select>
+        `;
+
+        const select =
+            document.getElementById("warViewSelect");
+
+        select.addEventListener("change", function () {
+
+            const view = this.value;
+
+            const calendarId =
+                "0ee7c730b8f4a47bad10d4bf22595bba662bad1c3e903d81b643a23e0d8f57b4@group.calendar.google.com";
+
+            const url =
+                "https://calendar.google.com/calendar/embed?src=" +
+                encodeURIComponent(calendarId) +
+                "&ctz=America%2FHalifax&mode=" +
+                view;
+
+            if (view !== "MONTH") {
+                window.open(
+                    url,
+                    "_blank",
+                    "noopener,noreferrer"
+                );
+
+                this.value = "MONTH";
+            }
+
+        });
+
+    }
+
+    window.addEventListener(
+        "load",
+        function () {
+            setTimeout(fixWarCalendarDropdown, 100);
+        }
+    );
+
+})();
+</script>
 </body>
 </html>
