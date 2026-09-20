@@ -1536,3 +1536,19 @@ button[hidden] {
         0 0 0 5px #d49a58,
         0 12px 35px rgba(0,0,0,0.7) !important;
 }
+/* REMOVE BLACK BAR BEHIND CALENDAR SLOGAN */
+
+#guild-calendar .war-bottom {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+#guild-calendar .war-bottom::before,
+#guild-calendar .war-bottom::after {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
