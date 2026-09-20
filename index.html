@@ -4733,5 +4733,29 @@ body.cinematic-site #roster > .lead::after,
     }
 }
 </style>
+<script>
+/* REMOVE THE HORDE DOES NOT FORGET */
+
+(function () {
+    function removeHordeText() {
+        document.querySelectorAll("p, span, div, h1, h2, h3, h4, h5, h6")
+            .forEach(function(el) {
+                if (
+                    el.children.length === 0 &&
+                    el.textContent.trim().toUpperCase() ===
+                    "THE HORDE DOES NOT FORGET"
+                ) {
+                    el.style.setProperty("display", "none", "important");
+                }
+            });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", removeHordeText);
+    } else {
+        removeHordeText();
+    }
+})();
+</script>
 </body>
 </html>
