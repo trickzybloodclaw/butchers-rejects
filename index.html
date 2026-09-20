@@ -1148,39 +1148,6 @@ body.cinematic-site .ribbon {
     label.textContent =
       monthNames[month] + " " + year;
 
-    if (document.getElementById("warView").value === "agenda") {
-      grid.classList.add("war-agenda-view");
-      const monthStart = dateKey(year, month, 1);
-      const monthEnd = dateKey(year, month, new Date(year, month + 1, 0).getDate());
-      const matching = events.flatMap(event =>
-        eventDateKeys(event)
-          .filter(key => key >= monthStart && key <= monthEnd)
-          .map(key => ({ key, event }))
-      ).sort((a, b) => a.key.localeCompare(b.key) ||
-        (a.event.start.dateTime || a.event.start.date || "").localeCompare(
-          b.event.start.dateTime || b.event.start.date || ""));
-
-      if (!matching.length) {
-        grid.appendChild(createElement("p", "war-agenda-empty", "No guild events scheduled for this month."));
-      }
-      matching.forEach(({ key, event }) => {
-        const item = createElement("div", "war-agenda-item");
-        const day = new Date(key + "T12:00:00");
-        const dateLabel = day.toLocaleDateString("en-CA", {
-          weekday: "short", month: "short", day: "numeric"
-        });
-        item.appendChild(createElement("div", "war-agenda-date", dateLabel));
-        const button = createElement("button", "war-event", event.summary || "Guild Event");
-        button.type = "button";
-        button.addEventListener("click", () => showEvent(event));
-        item.appendChild(button);
-        item.appendChild(createElement("div", "war-agenda-time", formatEventTime(event)));
-        grid.appendChild(item);
-      });
-      return;
-    }
-    grid.classList.remove("war-agenda-view");
-
     weekdays.forEach(name => {
       grid.appendChild(
         createElement("div","war-weekday",name)
@@ -1428,10 +1395,9 @@ body.cinematic-site .ribbon {
             </div>
 
             <div class="war-controls">
-              <select class="war-btn" id="warView" aria-label="Calendar view">
-                <option value="month">MONTH</option>
-                <option value="agenda">AGENDA</option>
-              </select>
+              <span class="war-btn">
+                MONTH ▾
+              </span>
             </div>
 
           </div>
@@ -1546,8 +1512,6 @@ body.cinematic-site .ribbon {
       loadEvents();
     });
 
-    document.getElementById("warView").addEventListener("change", renderCalendar);
-
     renderCalendar();
     loadEvents();
   }
@@ -1565,33 +1529,7 @@ body.cinematic-site .ribbon {
   
 <!-- ==========================================
  BUTCHERS REJECTS — WAR CALENDAR VISUAL UPGRADE
- Paste once, immediately before <style>
-/* Agenda is only visible when selected; month view retains its existing styling. */
-#guild-calendar .war-grid.war-agenda-view {
-  display: block !important;
-  text-align: left;
-}
-#guild-calendar .war-agenda-item {
-  padding: 12px 14px;
-  border-bottom: 1px solid #654027;
-}
-#guild-calendar .war-agenda-date {
-  color: #d99b5d;
-  font-family: Georgia, serif;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-#guild-calendar .war-agenda-time,
-#guild-calendar .war-agenda-empty {
-  color: #e8c99b;
-  font-size: 12px;
-  padding: 8px 0;
-}
-#guild-calendar .war-agenda-empty { padding: 22px; }
-#guild-calendar #warView { cursor: pointer; }
-#guild-calendar #warView option { background: #1c120c; color: #f2dfc0; }
-</style>
-</body>
+ Paste once, immediately before </body>
 ========================================== -->
 
 <style>
@@ -2459,29 +2397,6 @@ body.cinematic-site .ribbon {
 #guild-calendar::after {
   content: none !important;
   display: none !important;
-}
-</style>
-<style>
-/* Remove the black background behind the calendar footer */
-#guild-calendar .war-bottom {
-  background: transparent !important;
-  box-shadow: none !important;
-}
-</style>
-<style>
-/* Continuous bronze trim around the calendar frame */
-#guild-calendar .war-frame::before {
-  content: "";
-  position: absolute;
-  inset: -3px;
-  width: auto;
-  height: auto;
-  z-index: 2;
-  border: 2px solid #d18a4d;
-  border-radius: 3px;
-  background: none;
-  box-shadow: 0 0 8px rgba(230, 106, 33, 0.35);
-  pointer-events: none;
 }
 </style>
 </body>
