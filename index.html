@@ -2468,5 +2468,21 @@ body.cinematic-site .ribbon {
   box-shadow: none !important;
 }
 </style>
+<style>
+/* Continuous bronze trim around the calendar frame */
+#guild-calendar .war-frame::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  width: auto;
+  height: auto;
+  z-index: 2;
+  border: 2px solid #d18a4d;
+  border-radius: 3px;
+  background: none;
+  box-shadow: 0 0 8px rgba(230, 106, 33, 0.35);
+  pointer-events: none;
+}
+</style>
 </body>
 </html>
