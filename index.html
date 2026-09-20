@@ -4300,5 +4300,91 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script>
+<style>
+/* WAR COUNCIL - MATCH WAR DRUMS HEADING */
+
+/* Remove the long decorative line above */
+.war-council-description {
+    border: none !important;
+    border-top: none !important;
+    box-shadow: none !important;
+}
+
+.war-council-description + hr,
+.war-council-description ~ hr {
+    display: none !important;
+}
+
+/* Match the WAR DRUMS text styling */
+.war-council-description {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    gap: 16px !important;
+    width: fit-content !important;
+    max-width: 100% !important;
+
+    margin: 25px auto 35px !important;
+    padding: 0 !important;
+
+    color: #C77955 !important;
+    font-family: Georgia, serif !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    letter-spacing: 2.5px !important;
+    line-height: 1.6 !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+}
+
+/* Matching bronze lines */
+.war-council-description::before,
+.war-council-description::after {
+    content: "" !important;
+    display: block !important;
+
+    flex: 0 0 55px !important;
+    width: 55px !important;
+    height: 1px !important;
+
+    border: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+/* Left bronze line */
+.war-council-description::before {
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #A86A3C
+    ) !important;
+}
+
+/* Right bronze line */
+.war-council-description::after {
+    background: linear-gradient(
+        90deg,
+        #A86A3C,
+        transparent
+    ) !important;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .war-council-description {
+        font-size: 11px !important;
+        letter-spacing: 1px !important;
+        gap: 8px !important;
+    }
+
+    .war-council-description::before,
+    .war-council-description::after {
+        flex-basis: 20px !important;
+        width: 20px !important;
+    }
+}
+</style>
 </body>
 </html>
