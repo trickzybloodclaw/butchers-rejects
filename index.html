@@ -2381,5 +2381,16 @@ body.cinematic-site .ribbon {
 })();
 </script>
 <!-- END CALENDAR TITLE -->
+  
+<style>
+/* Remove the faint rectangle behind the calendar heading */
+#guild-calendar.butchers-war-calendar {
+  background: transparent !important;
+}
+
+#guild-calendar.butchers-war-calendar::before {
+  content: none !important;
+}
+</style>
 </body>
 </html>
