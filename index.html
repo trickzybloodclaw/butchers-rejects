@@ -3851,5 +3851,58 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+<style>
+/* WAR COUNCIL DESCRIPTION - CENTRED WITH BRONZE LINES */
+
+body.cinematic-site .roster .lead,
+body.cinematic-site .warband .lead {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 18px !important;
+
+    width: 100% !important;
+    max-width: none !important;
+    margin: 20px auto 35px !important;
+
+    text-align: center !important;
+    color: #E8D7BA !important;
+}
+
+/* BRONZE LINES ON BOTH SIDES */
+
+body.cinematic-site .roster .lead::before,
+body.cinematic-site .roster .lead::after,
+body.cinematic-site .warband .lead::before,
+body.cinematic-site .warband .lead::after {
+    content: "" !important;
+    display: block !important;
+    flex: 1 1 0 !important;
+    min-width: 20px !important;
+    max-width: 100px !important;
+    height: 1px !important;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #A86A3C
+    ) !important;
+}
+
+body.cinematic-site .roster .lead::after,
+body.cinematic-site .warband .lead::after {
+    transform: rotate(180deg);
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    body.cinematic-site .roster .lead,
+    body.cinematic-site .warband .lead {
+        gap: 8px !important;
+        font-size: 14px !important;
+    }
+}
+</style>
 </body>
 </html>
