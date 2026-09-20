@@ -1426,22 +1426,16 @@ button[hidden] {
   /* Keep the calendar grid readable */
   body.cinematic-site #guild-calendar > div {
     background: #111 !important;
-  }
-}/* DARK IRON & ORANGE RIBBON — MOBILE ONLY */
+  }/* MOBILE RIBBON — MATCH DESKTOP */
 @media (max-width: 850px) {
   body.cinematic-site .ribbon {
     position: relative;
     z-index: 1;
     margin: 0 !important;
-    padding: 18px 12px !important;
-    background: linear-gradient(
-      180deg,
-      #302820 0%,
-      #151311 45%,
-      #211b16 100%
-    ) !important;
-    border-top: 2px solid #a98a50 !important;
-    border-bottom: 2px solid #a98a50 !important;
+    padding: 16px 12px !important;
+    background: rgba(18, 12, 11, 0.78) !important;
+    border-top: 1px solid rgba(174, 77, 49, 0.65) !important;
+    border-bottom: 1px solid rgba(174, 77, 49, 0.65) !important;
     color: #e8d7b5 !important;
     font-family: Cinzel, Georgia, serif;
     font-size: 10px !important;
@@ -1450,8 +1444,7 @@ button[hidden] {
     letter-spacing: 1px !important;
     text-align: center;
     text-shadow: 0 2px 5px #000;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.7);
+    box-shadow: inset 0 0 22px rgba(0, 0, 0, 0.35);
   }
 }
-  }
 }
