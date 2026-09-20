@@ -4656,5 +4656,82 @@ body.cinematic-site #roster > .section-rule {
     }
 }
 </style>
+<style>
+/* WAR COUNCIL — BIGGER TEXT & PERFECTLY ALIGNED LINES */
+
+body.cinematic-site #roster > .lead,
+.war-council-description {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: fit-content !important;
+    max-width: 95% !important;
+    margin: 30px auto 40px !important;
+    padding: 0 !important;
+    gap: 18px !important;
+
+    font-family: Georgia, serif !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.5px !important;
+    line-height: 1.5 !important;
+    color: #E8D7B5 !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+
+    border: none !important;
+    box-shadow: none !important;
+    background: none !important;
+}
+
+/* BOTH BRONZE LINES — SAME SIZE & HEIGHT */
+
+body.cinematic-site #roster > .lead::before,
+body.cinematic-site #roster > .lead::after,
+.war-council-description::before,
+.war-council-description::after {
+    content: "" !important;
+    display: block !important;
+    position: static !important;
+
+    flex: 0 0 65px !important;
+    width: 65px !important;
+    min-width: 65px !important;
+    max-width: 65px !important;
+    height: 1px !important;
+
+    align-self: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+
+    background: #A86A3C !important;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    body.cinematic-site #roster > .lead,
+    .war-council-description {
+        font-size: 13px !important;
+        letter-spacing: 0.5px !important;
+        gap: 8px !important;
+    }
+
+    body.cinematic-site #roster > .lead::before,
+    body.cinematic-site #roster > .lead::after,
+    .war-council-description::before,
+    .war-council-description::after {
+        flex: 0 0 20px !important;
+        width: 20px !important;
+        min-width: 20px !important;
+        max-width: 20px !important;
+    }
+}
+</style>
 </body>
 </html>
