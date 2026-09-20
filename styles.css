@@ -798,3 +798,110 @@ button[hidden] {
   }
 
 }
+
+/* ======================================
+   BUTCHERS REJECTS - MOBILE ARTWORK
+   PC WEBSITE STAYS UNCHANGED
+====================================== */
+
+@media screen and (max-width: 850px) {
+
+  /* Hide desktop artwork and old mobile video */
+  .cinematic-desktop,
+  .mobile-background-video {
+    display: none !important;
+  }
+
+  /* Restore mobile header */
+  .cinematic-site > .top {
+    display: flex !important;
+  }
+
+  /* Clean mobile homepage */
+  .cinematic-site .cinematic-hero {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #110e0c !important;
+    overflow: hidden !important;
+  }
+
+  /* Show the new vertical artwork */
+  .cinematic-mobile {
+    display: flex !important;
+    position: relative !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+
+    width: 100% !important;
+    min-height: 145vw !important;
+    height: auto !important;
+
+    padding: 80vw 20px 35px !important;
+    margin: 0 !important;
+    gap: 15px !important;
+
+    background-image: url("images/guild-mobile.png") !important;
+    background-size: 100% auto !important;
+    background-position: center top !important;
+    background-repeat: no-repeat !important;
+    background-color: #110e0c !important;
+  }
+
+  /* Hide duplicate mobile logo */
+  .cinematic-mobile .mobile-crest {
+    display: none !important;
+  }
+
+  /* Remove old overlays */
+  .cinematic-site .cinematic-hero::after {
+    display: none !important;
+  }
+
+  /* Hide duplicate motto already printed on image */
+  .cinematic-mobile .motto {
+    display: none !important;
+  }
+
+  /* Real clickable buttons */
+  .cinematic-mobile .actions {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 360px !important;
+    gap: 12px !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .cinematic-mobile .actions .btn {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    min-height: 52px !important;
+    padding: 14px !important;
+    margin: 0 !important;
+    font-size: 12px !important;
+    text-align: center !important;
+    white-space: normal !important;
+  }
+
+  /* Scroll to apply */
+  .cinematic-mobile .mobile-scroll {
+    display: block !important;
+    position: relative !important;
+    z-index: 2 !important;
+    margin: 8px auto 0 !important;
+    text-align: center !important;
+    font-size: 11px !important;
+    letter-spacing: 2px !important;
+  }
+
+}
