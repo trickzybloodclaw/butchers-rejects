@@ -3837,5 +3837,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script>
+<script>
+/* REMOVE THE BLOOD-BOUND SUBHEADING */
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("p, span, div").forEach(function(el) {
+        if (
+            el.children.length === 0 &&
+            el.textContent.trim().toUpperCase() === "THE BLOOD-BOUND"
+        ) {
+            el.style.display = "none";
+        }
+    });
+});
+</script>
 </body>
 </html>
