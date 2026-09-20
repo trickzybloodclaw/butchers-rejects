@@ -1191,31 +1191,65 @@ button[hidden] {
   }
 }
 
-/* SMOKY BATTLEFIELD — WEBSITE SECTIONS ONLY */
+
+/* FORTRESS WALLS — DESKTOP SECTIONS ONLY */
 @media (min-width: 851px) {
 
   body.cinematic-site {
-    background:
-      radial-gradient(
-        ellipse at 12% 35%,
-        rgba(155, 35, 20, 0.22),
-        transparent 42%
+    background-color: #100d0c;
+
+    background-image:
+      /* Faint red cracks */
+      linear-gradient(
+        118deg,
+        transparent 48%,
+        rgba(165, 35, 24, 0.18) 49%,
+        transparent 50%
       ),
+      linear-gradient(
+        63deg,
+        transparent 48%,
+        rgba(135, 27, 20, 0.12) 49%,
+        transparent 50%
+      ),
+
+      /* Uneven stone shading */
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 95px,
+        rgba(0, 0, 0, 0.28) 96px 99px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0 180px,
+        rgba(0, 0, 0, 0.22) 181px 184px
+      ),
+
+      /* Dark fortress atmosphere */
       radial-gradient(
-        ellipse at 88% 70%,
-        rgba(120, 25, 15, 0.20),
+        ellipse at 15% 40%,
+        rgba(105, 25, 18, 0.15),
         transparent 45%
       ),
       linear-gradient(
         135deg,
-        #100d0b 0%,
-        #21120f 45%,
-        #100d0b 100%
+        #181412,
+        #27201c 45%,
+        #100d0c
       );
+
+    background-size:
+      420px 350px,
+      550px 450px,
+      100% 200px,
+      360px 100%,
+      100% 100%,
+      100% 100%;
+
     background-attachment: scroll;
   }
 
-  /* Show battlefield background behind content */
+  /* Reveal the fortress background */
   .cinematic-site .story,
   .cinematic-site .recruit,
   .cinematic-site #roster,
@@ -1223,12 +1257,13 @@ button[hidden] {
     background: transparent !important;
   }
 
-  /* Keep recruitment form readable */
-  .cinematic-site .panel,
+  /* Dark stone panels for readable content */
   .cinematic-site .tile,
   .cinematic-site .member,
+  .cinematic-site .panel,
   .cinematic-site .gallery-card {
-    background: rgba(24, 16, 13, 0.88);
-    backdrop-filter: blur(5px);
+    background: rgba(19, 15, 13, 0.92) !important;
+    border: 1px solid #584036;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
   }
 }
