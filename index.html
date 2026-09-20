@@ -35,12 +35,18 @@
     <section class="hero cinematic-hero" id="home" aria-label="The Butchers Rejects homepage">
 
       <div class="cinematic-desktop">
-        <img
-          class="cinematic-picture"
-          src="images/homepage-art.png"
-          alt="The Butchers Rejects warband homepage artwork"
-          fetchpriority="high"
-        >
+     <video
+  class="cinematic-picture"
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="auto"
+  poster="images/homepage-art.png"
+  style="display:block; width:100%; height:auto; object-fit:contain; pointer-events:none;"
+>
+  <source src="images/guild-background.mp4" type="video/mp4">
+</video>
 
         <div class="cinematic-links" aria-label="Homepage navigation">
           <a class="hotspot hs-brand" href="#home" aria-label="Home"></a>
