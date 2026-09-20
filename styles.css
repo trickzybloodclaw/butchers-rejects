@@ -905,3 +905,41 @@ button[hidden] {
   }
 
 }
+
+/* MOBILE - MOVE BUTTONS BELOW ARTWORK */
+@media screen and (max-width: 850px) {
+
+  .cinematic-mobile {
+    min-height: 0 !important;
+    padding: 0 20px 35px !important;
+
+    background-size: 100% auto !important;
+    background-position: center top !important;
+    background-repeat: no-repeat !important;
+  }
+
+  /* Reserve space for the full portrait image */
+  .cinematic-mobile::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 9 / 16;
+    flex: 0 0 auto;
+  }
+
+  /* Place buttons underneath the image */
+  .cinematic-mobile .actions {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 360px !important;
+    margin: 20px auto 0 !important;
+    z-index: 2 !important;
+  }
+
+  .cinematic-mobile .mobile-scroll {
+    position: relative !important;
+    margin: 12px auto 0 !important;
+  }
+
+}
