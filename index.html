@@ -1,356 +1,65 @@
+⚔ THE BUTCHERS REJECTS ☰
+Our Warband Recruitment Roster War Cries Gallery Member Login
 
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#120e0c">
-  <meta name="description" content="The Butchers Rejects — a Horde guild forged in battle. Join our warband for raids, dungeons and more.">
-  <title>The Butchers Rejects | Horde Guild</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-
-<body class="cinematic-site">
-
-  <header class="top">
-    <a class="brand" href="#home">
-      <span class="sigil">⚔</span>
-      <span>THE BUTCHERS <b>REJECTS</b></span>
-    </a>
-
-    <button class="menu" id="menu" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
-
-    <nav id="nav">
-      <a href="#story">Our Warband</a>
-      <a href="#recruit">Recruitment</a>
-      <a href="#roster">Roster</a>
-      <a href="#news">War Cries</a>
-      <a href="#gallery">Gallery</a>
-      <button id="loginBtn" class="nav-login" type="button">Member Login</button>
-    </nav>
-  </header>
-
-  <main>
-
-    <section class="hero cinematic-hero" id="home" aria-label="The Butchers Rejects homepage">
-
-      <div class="cinematic-desktop">
-     <video
-  class="cinematic-picture"
-  autoplay
-  muted
-  loop
-  playsinline
-  preload="auto"
-  poster="images/homepage-art.png"
-  style="display:block; width:100%; height:auto; object-fit:contain; pointer-events:none;"
->
-  <source src="images/guild-background.mp4" type="video/mp4">
-</video>
-
-        <div class="cinematic-links" aria-label="Homepage navigation">
-          <a class="hotspot hs-brand" href="#home" aria-label="Home"></a>
-          <a class="hotspot hs-home" href="#home" aria-label="Home"></a>
-          <a class="hotspot hs-story" href="#story" aria-label="Our Warband"></a>
-          <a class="hotspot hs-recruit" href="#recruit" aria-label="Recruitment"></a>
-          <a class="hotspot hs-roster" href="#roster" aria-label="Roster"></a>
-          <a class="hotspot hs-news" href="#news" aria-label="War Cries and announcements"></a>
-          <a class="hotspot hs-gallery" href="#gallery" aria-label="Gallery"></a>
-
-          <button
-            class="hotspot hs-login"
-            type="button"
-            data-open-login
-            aria-label="Member Login"
-          ></button>
-
-          <a class="hotspot hs-apply" href="#recruit" aria-label="Apply to the guild"></a>
-
-          <a
-            class="hotspot hs-discord"
-            href="https://discord.gg/cuGad4an"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Join our Discord"
-          ></a>
-
-          <a class="hotspot hs-scroll" href="#recruit" aria-label="Scroll to Apply"></a>
-
-          <!-- The four information panels in the artwork are not clickable. -->
-        </div>
-      </div>
-
-      <div class="cinematic-mobile">
-        <video
-  class="mobile-background-video"
-  autoplay
-  muted
-  loop
-  playsinline
-  preload="metadata"
-  poster="images/homepage-art.png"
->
-  <source src="images/guild-background.mp4" type="video/mp4">
-</video>
-        <img
-          class="mobile-crest"
-          src="images/guild-logo.png"
-          alt="The Butchers Rejects Tauren guild logo"
-        >
-
-        <p class="motto">“Cast aside by the world. United beneath one banner. Unbroken by war.”</p>
-
-        <div class="actions">
-          <a class="btn primary" href="#recruit">ANSWER THE WAR DRUMS ↗</a>
-          <a
-            class="btn secondary"
-            href="https://discord.gg/cuGad4an"
-            target="_blank"
-            rel="noopener noreferrer"
-          >JOIN OUR DISCORD ↗</a>
-        </div>
-
-        <a class="mobile-scroll" href="#recruit">SCROLL TO APPLY ↓</a>
-      </div>
-
-    </section>
-
-    <div class="ribbon">
-      ✦ FORGED BY BATTLE ✦ BOUND BY HONOR ✦
-    </div>
-
-    <section class="section story" id="story">
-      <p class="eyebrow">THE WAR DRUMS ECHO</p>
-
-      <h2>REJECTED BY MANY.<br><em>FEARED BY ALL.</em></h2>
-
-      <p class="lead">
-        The Butchers Rejects are recruiting those who thrive in the shadows and hunger for battle.
-        From the darkest dungeons to the bloodiest raids, we conquer together.
-      </p>
-
-      <p>
-        Whether you’re a seasoned veteran or fresh meat, we offer a helpful, active guild
-        for dungeons, raids, questing, and endless carnage. The blood runs deep.
-        Let our enemies learn why we were rejected.
-      </p>
-
-      <div class="three">
-        <article class="tile">
-          <span></span>
-          <h3>DUNGEONS</h3>
-          <p>Delve into the dark with your warband.</p>
-        </article>
-
-        <article class="tile">
-          <span></span>
-          <h3>RAIDS</h3>
-          <p>Face mighty foes. Claim hard-won glory.</p>
-        </article>
-
-        <article class="tile">
-          <span></span>
-          <h3>QUESTING</h3>
-          <p>Fresh meat and veterans fight together.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section recruit" id="recruit">
-
-      <div>
-        <p class="eyebrow">YOUR PLACE IN THE WARBAND</p>
-
-        <h2>THE DRUMS<br>OF WAR<br><em>CALL YOUR NAME.</em></h2>
-
-        <p>
-          Looking for a helpful, active Horde guild? Tell us a little about yourself,
-          then join our Discord to speak with the warband.
-        </p>
-
-        <p class="note">
-          Submit your application below. Our guild officers will review it and contact you soon.
-        </p>
-      </div>
-
-      <form id="applyForm" class="panel">
-
-        <label>
-          CHARACTER NAME
-          <input
-            name="character"
-            required
-            maxlength="60"
-            placeholder="Your character name"
-          >
-        </label>
-
-        <label>
-          CLASS / SPEC
-          <input
-            name="classSpec"
-            required
-            maxlength="80"
-            placeholder="e.g. Feral Druid"
-          >
-        </label>
-
-        <label>
-          BATTLETAG
-          <input
-            name="battleTag"
-            required
-            maxlength="80"
-            placeholder="e.g., Warrior#1234"
-          >
-          <small>
-            Please include your BattleTag so our guild officers can contact you
-            about your application and invite you to the warband!
-          </small>
-        </label>
-
-        <label>
-          YOUR BATTLE EXPERIENCE
-          <select name="experience" required>
-            <option value="">Choose your experience</option>
-            <option>Fresh meat / New player</option>
-            <option>Dungeons</option>
-            <option>Raids</option>
-            <option>Questing / Social</option>
-            <option>A little of everything</option>
-          </select>
-        </label>
-
-        <label>
-          MESSAGE TO THE WARBAND
-          <textarea
-            name="message"
-            rows="4"
-            maxlength="1200"
-            placeholder="Tell us about yourself..."
-          ></textarea>
-        </label>
-
-        <button class="btn primary" type="submit">SEND APPLICATION ↗</button>
-
-        <p id="applyStatus" class="status" role="status"></p>
-
-      </form>
-    </section>
-
-    <section class="section" id="roster">
-      <p class="eyebrow">THE BLOOD-BOUND</p>
-      <h2>MEET THE <em>WARBAND.</em></h2>
-
-      <p class="lead">
-        Meet the warriors who lead the charge beneath our banner
-      </p>
-
-      <div class="cards" id="rosterCards"></div>
-    </section>
-
-    <section class="section news" id="news">
-      <p class="eyebrow">FROM THE WAR CAMP</p>
-      <h2>WAR CRIES & <em>ANNOUNCEMENTS.</em></h2>
-      <div class="cards" id="newsCards"></div>
-    </section>
-
-    <section class="section" id="gallery">
-      <p class="eyebrow">SPOILS OF WAR</p>
-      <h2>THE BATTLE <em>CHRONICLES.</em></h2>
-
-      <p class="lead">
-        Add your own guild screenshots to the <code>images</code> folder and update
-        <code>data.js</code>. Until then, these are decorative placeholders.
-      </p>
-
-      <div class="gallery" id="galleryCards"></div>
-    </section>
-
-    <section class="final-call">
-      <p class="eyebrow">THE HORDE DOES NOT FORGET</p>
-      <h2>FOR THE <em>HORDE!</em></h2>
-      <p>The war drums echo. The blood runs deep.</p>
-    </section>
-
-  </main>
-
-  <footer>
-    <span>⚔ THE BUTCHERS REJECTS</span>
-    <span>Independent fan-made guild website. Not affiliated with Blizzard Entertainment.</span>
-    <a
-      href="https://discord.gg/cuGad4an"
-      target="_blank"
-      rel="noopener noreferrer"
-    >DISCORD ↗</a>
-  </footer>
-
-  <dialog id="loginDialog">
-
-    <form method="dialog" class="dialog-head">
-      <strong>MEMBER PORTAL</strong>
-      <button aria-label="Close login">✕</button>
-    </form>
-
-    <div class="dialog-body">
-      <p>Sign in with Discord to access The Butchers Rejects member portal.</p>
-
-      <div id="authArea">
-        <label>
-          EMAIL
-          <input
-            id="email"
-            type="email"
-            autocomplete="email"
-            placeholder="warrior@example.com"
-          >
-        </label>
-
-        <label>
-          PASSWORD
-          <input
-            id="password"
-            type="password"
-            autocomplete="current-password"
-            placeholder="Your password"
-          >
-        </label>
-
-        <div class="auth-actions">
-          <button class="btn primary" id="signIn" type="button">SIGN IN</button>
-          <button class="btn secondary" id="signUp" type="button">CREATE ACCOUNT</button>
-        </div>
-      </div>
-
-      <p id="authStatus" class="status" role="status"></p>
-    </div>
-
-  </dialog>
-
-  <script src="config.js"></script>
-  <script src="data.js"></script>
-  <script type="module" src="app.js"></script>
-  <script type="module" src="auth.js"></script>
-
-  <script>
-    // Keep Member Login working, including after sign-out.
-    document.addEventListener("click", function (event) {
-      const button = event.target.closest(
-        ".hs-login, [data-open-login], #loginBtn"
-      );
-
-      if (!button) return;
-
-      event.preventDefault();
-      event.stopImmediatePropagation();
-
-      const dialog = document.getElementById("loginDialog");
-
-      if (dialog && !dialog.open) {
-        dialog.showModal();
-      }
-    }, true);
-  </script>
-
-</body>
-</html>
+“Cast aside by the world. United beneath one banner. Unbroken by war.”
+
+ANSWER THE WAR DRUMS ↗ JOIN OUR DISCORD ↗
+SCROLL TO APPLY ↓
+✦ FORGED BY BATTLE ✦ BOUND BY HONOR ✦
+THE WAR DRUMS ECHO
+
+REJECTED BY MANY.
+FEARED BY ALL.
+The Butchers Rejects are recruiting those who thrive in the shadows and hunger for battle. From the darkest dungeons to the bloodiest raids, we conquer together.
+
+Whether you’re a seasoned veteran or fresh meat, we offer a helpful, active guild for dungeons, raids, questing, and endless carnage. The blood runs deep. Let our enemies learn why we were rejected.
+
+DUNGEONS
+Delve into the dark with your warband.
+
+RAIDS
+Face mighty foes. Claim hard-won glory.
+
+QUESTING
+Fresh meat and veterans fight together.
+
+YOUR PLACE IN THE WARBAND
+
+THE DRUMS
+OF WAR
+CALL YOUR NAME.
+Looking for a helpful, active Horde guild? Tell us a little about yourself, then join our Discord to speak with the warband.
+
+Submit your application below. Our guild officers will review it and contact you soon.
+
+CHARACTER NAME 
+Your character name
+ CLASS / SPEC 
+e.g. Feral Druid
+ BATTLETAG 
+e.g., Warrior#1234
+ Please include your BattleTag so our guild officers can contact you about your application and invite you to the warband! YOUR BATTLE EXPERIENCE 
+Choose your experience
+ MESSAGE TO THE WARBAND 
+Tell us about yourself...
+
+ SEND APPLICATION ↗
+THE BLOOD-BOUND
+
+MEET THE WARBAND.
+Meet the warriors who lead the charge beneath our banner
+
+FROM THE WAR CAMP
+
+WAR CRIES & ANNOUNCEMENTS.
+SPOILS OF WAR
+
+THE BATTLE CHRONICLES.
+Add your own guild screenshots to the images folder and update data.js. Until then, these are decorative placeholders.
+
+THE HORDE DOES NOT FORGET
+
+FOR THE HORDE!
+The war drums echo. The blood runs deep.
+
+⚔ THE BUTCHERS REJECTS Independent fan-made guild website. Not affiliated with Blizzard Entertainment. DISCORD ↗
