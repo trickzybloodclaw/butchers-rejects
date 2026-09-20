@@ -1448,3 +1448,24 @@ button[hidden] {
   }
 }
 }
+
+/* MOBILE RIBBON — DARK IRON AND GOLD */
+@media screen and (max-width: 850px) {
+  body.cinematic-site .ribbon {
+    background: linear-gradient(
+      180deg,
+      #302b25 0%,
+      #191715 50%,
+      #302b25 100%
+    ) !important;
+
+    color: #e8d7b5 !important;
+
+    border-top: 2px solid #b99855 !important;
+    border-bottom: 2px solid #b99855 !important;
+
+    box-shadow:
+      inset 0 0 25px rgba(0,0,0,0.7),
+      0 4px 15px rgba(0,0,0,0.5) !important;
+  }
+}
