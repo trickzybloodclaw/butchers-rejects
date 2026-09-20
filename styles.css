@@ -1267,3 +1267,39 @@ button[hidden] {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
   }
 }
+/* FORTRESS BACKGROUND — DESKTOP ONLY */
+@media (min-width: 851px) {
+
+  body.cinematic-site {
+    background-image:
+      linear-gradient(
+        rgba(8, 5, 5, 0.30),
+        rgba(8, 5, 5, 0.30)
+      ),
+      url("images/fortress-background.png") !important;
+
+    background-color: #110e0c !important;
+    background-position: center top !important;
+    background-size: 100% auto !important;
+    background-repeat: repeat-y !important;
+    background-attachment: scroll !important;
+  }
+
+  /* Reveal the same background across all sections */
+  body.cinematic-site .story,
+  body.cinematic-site .recruit,
+  body.cinematic-site #roster,
+  body.cinematic-site #gallery,
+  body.cinematic-site .news {
+    background: transparent !important;
+  }
+
+  /* Keep text and forms readable */
+  body.cinematic-site .tile,
+  body.cinematic-site .member,
+  body.cinematic-site .news-card,
+  body.cinematic-site .panel,
+  body.cinematic-site .gallery-card {
+    background: rgba(16, 11, 10, 0.88) !important;
+  }
+}
