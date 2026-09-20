@@ -652,5 +652,990 @@ body.cinematic-site .ribbon {
   }
 }
 </style>
+<!-- ==========================================
+ THE BUTCHERS REJECTS — CUSTOM WAR CALENDAR
+ ONE-PASTE INSTALLATION
+========================================== -->
+
+<style>
+/* CUSTOM CALENDAR SECTION */
+#guild-calendar.butchers-war-calendar {
+  position: relative !important;
+  padding: 65px 16px 85px !important;
+  text-align: center;
+  background: transparent !important;
+  color: #f2dfc0;
+  box-sizing: border-box;
+}
+
+#guild-calendar.butchers-war-calendar * {
+  box-sizing: border-box;
+}
+
+/* TITLE */
+#guild-calendar .war-symbol {
+  color: #bb3d23;
+  font-size: 32px;
+  text-shadow: 0 0 18px #b32d16;
+}
+
+#guild-calendar .war-title {
+  font-family: Georgia, serif !important;
+  font-size: clamp(29px, 5vw, 65px) !important;
+  font-weight: 900 !important;
+  color: #f2dfc0 !important;
+  -webkit-text-fill-color: #f2dfc0 !important;
+  line-height: 1.15;
+  margin: 12px 0 18px !important;
+  text-shadow:
+    0 3px 2px #000,
+    0 6px 15px #000,
+    0 0 22px rgba(180,75,30,.4) !important;
+}
+
+#guild-calendar .war-subtitle {
+  color: #e8c99b !important;
+  font-family: Georgia, serif;
+  font-size: clamp(11px, 1.3vw, 15px);
+  font-weight: bold;
+  letter-spacing: 3px;
+  line-height: 1.8;
+  margin: 0 0 12px;
+}
+
+#guild-calendar .war-slogan {
+  color: #cf5537 !important;
+  font-family: Georgia, serif;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  line-height: 1.8;
+  margin: 0 0 35px;
+}
+
+/* BRONZE FRAME */
+#guild-calendar .war-frame {
+  position: relative;
+  max-width: 1100px;
+  margin: auto;
+  padding: 8px;
+  background: linear-gradient(
+    135deg,#29180f,#100b08,#29180f
+  );
+  border: 2px solid #a36536;
+  border-radius: 3px;
+  box-shadow:
+    inset 0 0 0 1px #d08a49,
+    0 0 0 4px #150c08,
+    0 0 0 5px #704126,
+    0 15px 45px #000,
+    0 0 30px rgba(200,65,20,.25);
+}
+
+#guild-calendar .war-frame::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,transparent,#b96b35,
+    #ffd08a,#b96b35,transparent
+  );
+  box-shadow: 0 0 12px #bd4a20;
+}
+
+/* DECORATIVE CORNERS */
+#guild-calendar .war-corner {
+  position: absolute;
+  z-index: 3;
+  color: #e3a35d;
+  font-size: 24px;
+  line-height: 1;
+  text-shadow: 0 0 10px #b74d20;
+  pointer-events: none;
+}
+
+#guild-calendar .war-tl {top:-13px;left:-11px}
+#guild-calendar .war-tr {top:-13px;right:-11px}
+#guild-calendar .war-bl {bottom:-13px;left:-11px}
+#guild-calendar .war-br {bottom:-13px;right:-11px}
+
+/* CALENDAR INTERIOR */
+#guild-calendar .war-interior {
+  background: #110d0a;
+  border: 1px solid #54331e;
+  padding: 10px;
+}
+
+/* NAVIGATION */
+#guild-calendar .war-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 8px 5px 16px;
+}
+
+#guild-calendar .war-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#guild-calendar .war-btn {
+  appearance: none;
+  background: linear-gradient(#24170f,#100c09);
+  border: 1px solid #87502e;
+  border-radius: 20px;
+  padding: 9px 15px;
+  color: #f2dfc0;
+  font-family: Georgia,serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+#guild-calendar .war-btn:hover {
+  background: #66301d;
+  border-color: #d9944d;
+  color: #fff0d0;
+}
+
+#guild-calendar .war-month {
+  color: #f2dfc0;
+  font-family: Georgia,serif;
+  font-size: clamp(15px,2vw,20px);
+  font-weight: bold;
+  margin: 0 8px;
+}
+
+/* MONTH GRID */
+#guild-calendar .war-grid {
+  display: grid;
+  grid-template-columns: repeat(7,minmax(0,1fr));
+  border-top: 1px solid #704126;
+  border-left: 1px solid #704126;
+  background: #100b08;
+}
+
+#guild-calendar .war-weekday {
+  padding: 13px 2px;
+  color: #d89b60;
+  background: #20140e;
+  border-right: 1px solid #704126;
+  border-bottom: 1px solid #704126;
+  font-family: Georgia,serif;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+#guild-calendar .war-day {
+  position: relative;
+  min-width: 0;
+  min-height: 105px;
+  padding: 8px 5px;
+  background: #120e0b;
+  border-right: 1px solid #483020;
+  border-bottom: 1px solid #483020;
+  text-align: left;
+  overflow: hidden;
+}
+
+#guild-calendar .war-day.outside {
+  background: #0d0a08;
+}
+
+#guild-calendar .war-day.outside .war-date {
+  opacity: .4;
+}
+
+#guild-calendar .war-day.today {
+  background: #21130e;
+}
+
+#guild-calendar .war-date {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  color: #f2dfc0;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+}
+
+#guild-calendar .war-day.today .war-date {
+  background: #9f2618;
+  border: 1px solid #ff9854;
+  box-shadow: 0 0 10px #9f2618;
+}
+
+/* EVENTS */
+#guild-calendar .war-event {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  padding: 5px;
+  background: linear-gradient(
+    90deg,#7d2119,#43120e
+  );
+  border: 1px solid #b64d2c;
+  border-left: 3px solid #e39850;
+  border-radius: 3px;
+  color: #ffe4bb;
+  font-size: 11px;
+  text-align: left;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+#guild-calendar .war-event:hover {
+  background: #a53820;
+  border-color: #f0a45a;
+}
+
+#guild-calendar .war-more {
+  color: #d9a46b;
+  font-size: 11px;
+  padding-top: 4px;
+}
+
+/* STATUS AND FOOTER */
+#guild-calendar .war-status {
+  color: #c9a47c;
+  font-size: 12px;
+  padding: 12px 5px 4px;
+  text-align: left;
+}
+
+#guild-calendar .war-bottom {
+  margin-top: 30px;
+  color: #e8c99b;
+  font-family: Georgia,serif;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  line-height: 2;
+}
+
+#guild-calendar .war-bottom span {
+  color: #c7783d;
+  margin: 0 10px;
+}
+
+#guild-calendar .war-google {
+  display: inline-block;
+  margin-top: 12px;
+  color: #d9a46b;
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+/* EVENT DETAILS */
+#warEventDialog {
+  width: min(440px,calc(100% - 30px));
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 25px;
+  background: #160e0a;
+  color: #f2dfc0;
+  border: 2px solid #a36536;
+  border-radius: 5px;
+  box-shadow: 0 20px 70px #000;
+}
+
+#warEventDialog::backdrop {
+  background: rgba(0,0,0,.85);
+}
+
+#warEventDialog h3 {
+  color: #f2dfc0;
+  font-family: Georgia,serif;
+  font-size: 25px;
+  margin: 0 0 15px;
+}
+
+#warEventDialog p {
+  color: #e8c99b;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+#warEventDialog a {
+  color: #e3a35d;
+}
+
+#warEventDialog .war-close {
+  float: right;
+  background: transparent;
+  border: 1px solid #87502e;
+  color: #f2dfc0;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* MOBILE */
+@media(max-width:768px) {
+  #guild-calendar.butchers-war-calendar {
+    padding: 45px 10px 65px !important;
+  }
+
+  #guild-calendar .war-title {
+    font-size: clamp(26px,7vw,42px) !important;
+  }
+
+  #guild-calendar .war-subtitle,
+  #guild-calendar .war-slogan {
+    letter-spacing: 1px;
+    font-size: 10px;
+  }
+
+  #guild-calendar .war-frame {
+    padding: 4px;
+  }
+
+  #guild-calendar .war-interior {
+    padding: 3px;
+  }
+
+  #guild-calendar .war-toolbar {
+    justify-content: center;
+  }
+
+  #guild-calendar .war-day {
+    min-height: 76px;
+    padding: 4px 2px;
+  }
+
+  #guild-calendar .war-date {
+    width: 21px;
+    height: 21px;
+    font-size: 11px;
+  }
+
+  #guild-calendar .war-weekday {
+    font-size: 10px;
+    padding: 10px 0;
+  }
+
+  #guild-calendar .war-event {
+    font-size: 9px;
+    padding: 3px 2px;
+  }
+
+  #guild-calendar .war-bottom {
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+}
+</style>
+
+<script>
+(function () {
+  "use strict";
+
+  /* =====================================
+     PASTE YOUR GOOGLE API KEY BELOW
+  ===================================== */
+
+  const GOOGLE_API_KEY =
+    "PASTE_YOUR_GOOGLE_API_KEY_HERE";
+
+  /* YOUR EXISTING PUBLIC GUILD CALENDAR */
+
+  const CALENDAR_ID =
+    "0ee7c730b8f4a47bad10d4bf22595bba662bad1c3e903d81b643a23e0d8f57b4@group.calendar.google.com";
+
+  const TIME_ZONE = "America/Halifax";
+
+  const GOOGLE_LINK =
+    "https://calendar.google.com/calendar/u/0/r?cid=" +
+    encodeURIComponent(CALENDAR_ID);
+
+  const monthNames = [
+    "January","February","March","April",
+    "May","June","July","August",
+    "September","October","November","December"
+  ];
+
+  const weekdays = [
+    "SUN","MON","TUE","WED","THU","FRI","SAT"
+  ];
+
+  let currentMonth;
+  let events = [];
+  let requestNumber = 0;
+
+  function pad(n) {
+    return String(n).padStart(2,"0");
+  }
+
+  function dateKey(year,month,day) {
+    return year + "-" + pad(month + 1) + "-" + pad(day);
+  }
+
+  function halifaxToday() {
+    const parts = new Intl.DateTimeFormat(
+      "en-CA",{
+        timeZone:TIME_ZONE,
+        year:"numeric",
+        month:"2-digit",
+        day:"2-digit"
+      }
+    ).formatToParts(new Date());
+
+    const get = type =>
+      Number(parts.find(p => p.type === type).value);
+
+    return new Date(
+      get("year"),
+      get("month") - 1,
+      get("day")
+    );
+  }
+
+  function formatEventTime(event) {
+    if (event.start.date) {
+      return "All-day event";
+    }
+
+    const start = new Date(event.start.dateTime);
+    const end = new Date(event.end.dateTime);
+
+    const formatter = new Intl.DateTimeFormat(
+      "en-CA",{
+        timeZone:TIME_ZONE,
+        hour:"numeric",
+        minute:"2-digit"
+      }
+    );
+
+    return formatter.format(start) +
+      " – " + formatter.format(end) +
+      " Atlantic Time";
+  }
+
+  function eventDateKeys(event) {
+    const keys = [];
+
+    if (event.start.date) {
+      const start = new Date(
+        event.start.date + "T00:00:00Z"
+      );
+
+      const end = new Date(
+        event.end.date + "T00:00:00Z"
+      );
+
+      for (
+        let day = new Date(start);
+        day < end && keys.length < 366;
+        day.setUTCDate(day.getUTCDate() + 1)
+      ) {
+        keys.push(day.toISOString().slice(0,10));
+      }
+
+      return keys;
+    }
+
+    const start = new Date(event.start.dateTime);
+    const end = new Date(event.end.dateTime);
+
+    // Subtract a millisecond because the end is exclusive.
+    const last = new Date(end.getTime() - 1);
+
+    const formatter = new Intl.DateTimeFormat(
+      "en-CA",{
+        timeZone:TIME_ZONE,
+        year:"numeric",
+        month:"2-digit",
+        day:"2-digit"
+      }
+    );
+
+    function key(date) {
+      const parts = formatter.formatToParts(date);
+      const get = type =>
+        parts.find(p => p.type === type).value;
+
+      return get("year") + "-" +
+        get("month") + "-" + get("day");
+    }
+
+    // Include each Atlantic calendar day touched by the event.
+    let cursor = new Date(start);
+
+    while (cursor <= last && keys.length < 366) {
+      const value = key(cursor);
+
+      if (!keys.includes(value)) {
+        keys.push(value);
+      }
+
+      cursor.setUTCHours(cursor.getUTCHours() + 12);
+    }
+
+    const finalKey = key(last);
+
+    if (!keys.includes(finalKey)) {
+      keys.push(finalKey);
+    }
+
+    return keys;
+  }
+
+  function createElement(tag,className,text) {
+    const element = document.createElement(tag);
+
+    if (className) element.className = className;
+
+    if (text !== undefined) {
+      element.textContent = text;
+    }
+
+    return element;
+  }
+
+  function showEvent(event) {
+    const dialog =
+      document.getElementById("warEventDialog");
+
+    const title =
+      document.getElementById("warEventTitle");
+
+    const time =
+      document.getElementById("warEventTime");
+
+    const description =
+      document.getElementById("warEventDescription");
+
+    const link =
+      document.getElementById("warEventLink");
+
+    title.textContent =
+      event.summary || "Guild Event";
+
+    time.textContent = formatEventTime(event);
+
+    description.textContent =
+      event.description || "No additional details.";
+
+    if (event.location) {
+      description.textContent +=
+        "\n\nLocation: " + event.location;
+    }
+
+    if (event.htmlLink) {
+      link.href = event.htmlLink;
+      link.hidden = false;
+    } else {
+      link.hidden = true;
+    }
+
+    if (!dialog.open) {
+      dialog.showModal();
+    }
+  }
+
+  function renderCalendar() {
+    const grid =
+      document.getElementById("warGrid");
+
+    const label =
+      document.getElementById("warMonthLabel");
+
+    grid.replaceChildren();
+
+    const year = currentMonth.getFullYear();
+    const month = currentMonth.getMonth();
+
+    label.textContent =
+      monthNames[month] + " " + year;
+
+    weekdays.forEach(name => {
+      grid.appendChild(
+        createElement("div","war-weekday",name)
+      );
+    });
+
+    const firstDay =
+      new Date(year,month,1).getDay();
+
+    const daysInMonth =
+      new Date(year,month + 1,0).getDate();
+
+    const today = halifaxToday();
+
+    const todayKey = dateKey(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
+    );
+
+    const totalCells =
+      Math.ceil((firstDay + daysInMonth) / 7) * 7;
+
+    for (let i = 0; i < totalCells; i++) {
+      const date = new Date(
+        year,month,i - firstDay + 1
+      );
+
+      const key = dateKey(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate()
+      );
+
+      const outside =
+        date.getMonth() !== month;
+
+      const cell = createElement(
+        "div",
+        "war-day" +
+        (outside ? " outside" : "") +
+        (key === todayKey ? " today" : "")
+      );
+
+      const number = createElement(
+        "span",
+        "war-date",
+        String(date.getDate())
+      );
+
+      cell.appendChild(number);
+
+      const dayEvents = events.filter(event =>
+        eventDateKeys(event).includes(key)
+      );
+
+      dayEvents.slice(0,3).forEach(event => {
+        const button = createElement(
+          "button",
+          "war-event",
+          event.summary || "Guild Event"
+        );
+
+        button.type = "button";
+
+        button.addEventListener("click",() => {
+          showEvent(event);
+        });
+
+        cell.appendChild(button);
+      });
+
+      if (dayEvents.length > 3) {
+        cell.appendChild(
+          createElement(
+            "div",
+            "war-more",
+            "+" + (dayEvents.length - 3) + " more"
+          )
+        );
+
+        const more = cell.lastElementChild;
+        more.style.cursor = "pointer";
+
+        more.addEventListener("click",() => {
+          showEvent(dayEvents[3]);
+        });
+      }
+
+      grid.appendChild(cell);
+    }
+  }
+
+  async function loadEvents() {
+    const status =
+      document.getElementById("warStatus");
+
+    const thisRequest = ++requestNumber;
+
+    if (
+      !GOOGLE_API_KEY ||
+      GOOGLE_API_KEY ===
+        "PASTE_YOUR_GOOGLE_API_KEY_HERE"
+    ) {
+      events = [];
+      status.textContent =
+        "Calendar design ready. Add your Google API key to load guild events.";
+      renderCalendar();
+      return;
+    }
+
+    status.textContent = "Loading guild events...";
+
+    const year = currentMonth.getFullYear();
+    const month = currentMonth.getMonth();
+
+    // Extra days cover the visible calendar grid
+    // and Atlantic timezone differences.
+    const start = new Date(
+      Date.UTC(year,month - 1,20)
+    );
+
+    const end = new Date(
+      Date.UTC(year,month + 2,10)
+    );
+
+    const params = new URLSearchParams({
+      key:GOOGLE_API_KEY,
+      timeMin:start.toISOString(),
+      timeMax:end.toISOString(),
+      singleEvents:"true",
+      orderBy:"startTime",
+      maxResults:"250",
+      timeZone:TIME_ZONE
+    });
+
+    const url =
+      "https://www.googleapis.com/calendar/v3/calendars/" +
+      encodeURIComponent(CALENDAR_ID) +
+      "/events?" + params.toString();
+
+    try {
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(
+          "Google Calendar returned " +
+          response.status
+        );
+      }
+
+      const data = await response.json();
+
+      if (thisRequest !== requestNumber) return;
+
+      events = (data.items || []).filter(
+        event => event.status !== "cancelled"
+      );
+
+      status.textContent =
+        "Guild events · Atlantic Time · Halifax";
+
+      if (data.nextPageToken) {
+        status.textContent +=
+          " · Some events may not be displayed";
+      }
+
+      renderCalendar();
+
+    } catch (error) {
+      if (thisRequest !== requestNumber) return;
+
+      events = [];
+
+      status.textContent =
+        "Unable to load events. Check your API key, website restrictions and public calendar settings.";
+
+      console.error("Guild Calendar:",error);
+
+      renderCalendar();
+    }
+  }
+
+  function installCalendar() {
+    const oldCalendars = [
+      ...document.querySelectorAll(
+        'section[id="guild-calendar"]'
+      )
+    ];
+
+    const calendar = createElement(
+      "section",
+      "butchers-war-calendar"
+    );
+
+    calendar.id = "guild-calendar";
+
+    calendar.innerHTML = `
+      <div class="war-symbol">⚔</div>
+
+      <h2 class="war-title">
+        ⚔ GUILD WAR CALENDAR ⚔
+      </h2>
+
+      <p class="war-subtitle">
+        UPCOMING RAIDS, DUNGEONS AND GUILD EVENTS
+      </p>
+
+      <p class="war-slogan">
+        ✦ FOR THE HORDE ✦ BY THE REJECTS
+        ✦ ALL ARE WELCOME ✦
+      </p>
+
+      <div class="war-frame">
+
+        <span class="war-corner war-tl">◆</span>
+        <span class="war-corner war-tr">◆</span>
+        <span class="war-corner war-bl">◆</span>
+        <span class="war-corner war-br">◆</span>
+
+        <div class="war-interior">
+
+          <div class="war-toolbar">
+
+            <div class="war-controls">
+              <button class="war-btn"
+                id="warToday" type="button">
+                Today
+              </button>
+
+              <button class="war-btn"
+                id="warPrev" type="button"
+                aria-label="Previous month">
+                ❮
+              </button>
+
+              <button class="war-btn"
+                id="warNext" type="button"
+                aria-label="Next month">
+                ❯
+              </button>
+            </div>
+
+            <div class="war-month"
+              id="warMonthLabel">
+            </div>
+
+            <div class="war-controls">
+              <span class="war-btn">
+                MONTH ▾
+              </span>
+            </div>
+
+          </div>
+
+          <div class="war-grid"
+            id="warGrid">
+          </div>
+
+          <div class="war-status"
+            id="warStatus"
+            role="status">
+          </div>
+
+        </div>
+      </div>
+
+      <div class="war-bottom">
+        ✦ FORGED BY BATTLE
+        <span>◆</span>
+        BOUND BY HONOR ✦
+      </div>
+
+      <a class="war-google"
+         id="warGoogleLink"
+         target="_blank"
+         rel="noopener noreferrer">
+         Open Guild Google Calendar ↗
+      </a>
+    `;
+
+    // Remove both old Google Calendar sections.
+    oldCalendars.forEach(old => old.remove());
+
+    // Place the custom calendar after announcements.
+    const news = document.getElementById("news");
+
+    if (news) {
+      news.insertAdjacentElement(
+        "afterend",calendar
+      );
+    } else {
+      document.querySelector("main")
+        .appendChild(calendar);
+    }
+
+    // Create event details popup.
+    const dialog = createElement(
+      "dialog"
+    );
+
+    dialog.id = "warEventDialog";
+
+    dialog.innerHTML = `
+      <button class="war-close"
+        id="warEventClose"
+        type="button"
+        aria-label="Close event details">
+        ✕
+      </button>
+
+      <h3 id="warEventTitle"></h3>
+
+      <p id="warEventTime"></p>
+
+      <p id="warEventDescription"></p>
+
+      <a id="warEventLink"
+         target="_blank"
+         rel="noopener noreferrer">
+         View event on Google Calendar ↗
+      </a>
+    `;
+
+    document.body.appendChild(dialog);
+
+    document.getElementById(
+      "warEventClose"
+    ).addEventListener("click",() => {
+      dialog.close();
+    });
+
+    document.getElementById(
+      "warGoogleLink"
+    ).href = GOOGLE_LINK;
+
+    currentMonth = halifaxToday();
+    currentMonth.setDate(1);
+
+    document.getElementById(
+      "warToday"
+    ).addEventListener("click",() => {
+      currentMonth = halifaxToday();
+      currentMonth.setDate(1);
+      loadEvents();
+    });
+
+    document.getElementById(
+      "warPrev"
+    ).addEventListener("click",() => {
+      currentMonth.setMonth(
+        currentMonth.getMonth() - 1
+      );
+      loadEvents();
+    });
+
+    document.getElementById(
+      "warNext"
+    ).addEventListener("click",() => {
+      currentMonth.setMonth(
+        currentMonth.getMonth() + 1
+      );
+      loadEvents();
+    });
+
+    renderCalendar();
+    loadEvents();
+  }
+
+  // Install after older calendar scripts finish.
+  window.addEventListener(
+    "load",
+    installCalendar
+  );
+
+})();
+</script>
+
+<!-- END CUSTOM WAR CALENDAR -->
 </body>
 </html>
