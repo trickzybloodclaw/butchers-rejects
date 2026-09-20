@@ -208,3 +208,14 @@ button[hidden] {
     display: none;
   }
 }
+
+/* Remove separate mobile logo and its background */
+@media (max-width: 850px) {
+  .cinematic-mobile .mobile-crest {
+    display: none !important;
+  }
+
+  .cinematic-mobile {
+    background: transparent !important;
+  }
+}
