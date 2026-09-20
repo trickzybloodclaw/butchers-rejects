@@ -1303,3 +1303,24 @@ button[hidden] {
     background: rgba(16, 11, 10, 0.88) !important;
   }
 }
+/* FORTRESS LONG BACKGROUND — DESKTOP ONLY */
+@media (min-width: 851px) {
+  body.cinematic-site {
+    background-image:
+      linear-gradient(rgba(8, 5, 5, 0.25), rgba(8, 5, 5, 0.25)),
+      url("images/fortress-long.png") !important;
+    background-color: #110e0c !important;
+    background-position: center top !important;
+    background-size: 100% auto !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+  }
+
+  body.cinematic-site .story,
+  body.cinematic-site .recruit,
+  body.cinematic-site #roster,
+  body.cinematic-site #gallery,
+  body.cinematic-site .news {
+    background: transparent !important;
+  }
+}
