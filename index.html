@@ -5132,5 +5132,70 @@ body.cinematic-site #gallery .section-title {
 
 })();
 </script>
+<script>
+/* FIX SPOILS OF WAR - THIRD GALLERY CARD */
+
+(function () {
+
+    function fixGallery() {
+
+        // Find the first card's heading
+        const firstHeading = [...document.querySelectorAll("*")]
+            .find(el =>
+                el.children.length === 0 &&
+                el.textContent.trim() === "THE FIRST VICTORY"
+            );
+
+        if (!firstHeading) return;
+
+        // Find the third card's description
+        const description = [...document.querySelectorAll("*")]
+            .find(el =>
+                el.children.length === 0 &&
+                el.textContent.trim() ===
+                "Show off your greatest victories."
+            );
+
+        if (!description) return;
+
+        // Check if the heading already exists
+        const existing = description.parentElement
+            .querySelector(".spoils-heading");
+
+        if (existing) return;
+
+        // Copy the first card's heading
+        const heading = firstHeading.cloneNode(true);
+
+        heading.textContent = "SPOILS OF WAR";
+        heading.classList.add("spoils-heading");
+        heading.removeAttribute("id");
+
+        // Insert it above the description
+        description.before(heading);
+
+    }
+
+    // Run after the page loads
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded", fixGallery
+        );
+    } else {
+        fixGallery();
+    }
+
+    // Also handle gallery cards loaded later
+    const observer = new MutationObserver(function () {
+        fixGallery();
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+
+})();
+</script>
 </body>
 </html>
