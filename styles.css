@@ -207,3 +207,133 @@ button[hidden] {
     display: none;
   }
 }
+
+/* CLEAN MOBILE HOMEPAGE ONLY */
+@media (max-width: 850px) {
+
+  html, body {
+    overflow-x: hidden;
+  }
+
+  /* Full-screen homepage */
+  .cinematic-site .cinematic-hero {
+    display: flex;
+    position: relative;
+    min-height: calc(100svh - 77px);
+    padding: 0 20px 35px;
+    background: #110e0c;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  /* Center the mobile content */
+  .cinematic-mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    max-width: 450px;
+    min-height: calc(100svh - 112px);
+    margin: auto;
+    gap: 16px;
+    background: transparent !important;
+  }
+
+  /* Large animated bull */
+  .mobile-background-video {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 72%;
+    object-fit: cover;
+    object-position: center top;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* Hide duplicate logo */
+  .mobile-crest {
+    display: none !important;
+  }
+
+  /* Dark fade for readable buttons */
+  .cinematic-site .cinematic-hero::after {
+    display: block;
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 25%,
+      transparent 42%,
+      #110e0c 76%
+    );
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* Motto */
+  .cinematic-mobile .motto {
+    color: #f1dfc2;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: center;
+    margin: 0 0 8px;
+    max-width: 340px;
+    text-shadow: 0 2px 8px #000;
+  }
+
+  /* Buttons */
+  .cinematic-mobile .actions {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 340px;
+    gap: 12px;
+  }
+
+  .cinematic-mobile .actions .btn {
+    width: 100%;
+    min-height: 52px;
+    padding: 14px;
+    font-size: 12px;
+    border-radius: 4px;
+  }
+
+  /* Scroll button */
+  .mobile-scroll {
+    display: block;
+    margin-top: 8px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-align: center;
+  }
+
+  /* Neater mobile sections */
+  .section {
+    padding: 65px 22px;
+  }
+
+  .section h2 {
+    font-size: clamp(30px, 8vw, 42px);
+    line-height: 1.15;
+  }
+
+  .section p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .panel {
+    padding: 22px;
+  }
+
+  .ribbon {
+    padding: 15px 12px;
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+}
