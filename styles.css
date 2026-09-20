@@ -1323,4 +1323,21 @@ button[hidden] {
   body.cinematic-site .news {
     background: transparent !important;
   }
+} /* FORTRESS LONG — BACKGROUND BEHIND DESKTOP CONTENT */
+@media (min-width: 851px) {
+  body.cinematic-site {
+    background:
+      linear-gradient(rgba(8, 5, 5, 0.15), rgba(8, 5, 5, 0.15)),
+      url("images/fortress-long.png") center top / 100% auto repeat-y
+      #110e0c !important;
+  }
+
+  body.cinematic-site main,
+  body.cinematic-site .story,
+  body.cinematic-site .recruit,
+  body.cinematic-site #roster,
+  body.cinematic-site #news,
+  body.cinematic-site #gallery {
+    background-color: transparent !important;
+  }
 }
