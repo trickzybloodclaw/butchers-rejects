@@ -1637,5 +1637,541 @@ body.cinematic-site .ribbon {
 </script>
 
 <!-- END CUSTOM WAR CALENDAR -->
+  
+<!-- ==========================================
+ BUTCHERS REJECTS — WAR CALENDAR VISUAL UPGRADE
+ Paste once, immediately before </body>
+========================================== -->
+
+<style>
+
+/* MAIN CALENDAR SECTION */
+
+#guild-calendar.butchers-war-calendar {
+  position: relative !important;
+  isolation: isolate;
+  padding: 65px 20px 85px !important;
+  color: #f2dfc0 !important;
+  text-align: center;
+}
+
+/* DARK ATMOSPHERE BEHIND TITLE */
+
+#guild-calendar.butchers-war-calendar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background: radial-gradient(
+    ellipse at 50% 35%,
+    rgba(12,7,4,.72),
+    rgba(12,7,4,.32) 55%,
+    transparent 85%
+  );
+}
+
+/* MAIN TITLE */
+
+#guild-calendar .war-title {
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: clamp(32px,5.2vw,72px) !important;
+  font-weight: 900 !important;
+  letter-spacing: 2px !important;
+  line-height: 1.12 !important;
+
+  color: #f2dfc0 !important;
+
+  background: linear-gradient(
+    180deg,
+    #fff4dc 0%,
+    #f2dfc0 42%,
+    #d79b63 80%,
+    #8f492a 100%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent !important;
+
+  filter: drop-shadow(0 4px 3px #000);
+
+  margin: 8px auto 18px !important;
+}
+
+/* HORDE SYMBOL */
+
+#guild-calendar .war-symbol {
+  color: #b52818 !important;
+  font-size: 32px;
+  margin-bottom: 5px;
+
+  text-shadow:
+    0 0 8px #c12c18,
+    0 0 20px rgba(200,45,15,.5),
+    0 3px 5px #000;
+}
+
+/* GOLD SUBTITLE */
+
+#guild-calendar .war-subtitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+
+  color: #e8c99b !important;
+  font-family: Georgia,serif !important;
+  font-size: clamp(11px,1.3vw,16px) !important;
+  font-weight: bold !important;
+  letter-spacing: 4px !important;
+  line-height: 1.8;
+
+  text-shadow: 0 2px 5px #000;
+}
+
+#guild-calendar .war-subtitle::before,
+#guild-calendar .war-subtitle::after {
+  content: "";
+  display: block;
+  width: 100px;
+  max-width: 10vw;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #d18a4d
+  );
+}
+
+#guild-calendar .war-subtitle::after {
+  transform: rotate(180deg);
+}
+
+/* RED BATTLE SLOGAN */
+
+#guild-calendar .war-slogan {
+  color: #d65a38 !important;
+  font-family: Georgia,serif !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  letter-spacing: 5px !important;
+  line-height: 2;
+  margin-bottom: 35px !important;
+
+  text-shadow:
+    0 2px 5px #000,
+    0 0 10px rgba(180,40,20,.35);
+}
+
+/* ==========================================
+   ORNATE BRONZE FRAME
+========================================== */
+
+#guild-calendar .war-frame {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto !important;
+  padding: 8px !important;
+
+  border: 2px solid #a86a3c !important;
+  border-radius: 2px !important;
+
+  background: linear-gradient(
+    135deg,
+    #3b2112 0%,
+    #100a07 20%,
+    #100a07 80%,
+    #3b2112 100%
+  ) !important;
+
+  box-shadow:
+    inset 0 0 0 1px #e3a35d,
+    inset 0 0 0 3px #261309,
+    0 0 0 2px #120905,
+    0 0 0 5px #422414,
+    0 0 0 6px #9d542b,
+    0 15px 45px rgba(0,0,0,.85),
+    0 0 30px rgba(210,65,15,.3) !important;
+}
+
+/* GLOWING TOP METAL TRIM */
+
+#guild-calendar .war-frame::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: 3%;
+  right: 3%;
+  height: 3px;
+  z-index: 2;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #8f3d1b,
+    #e99042,
+    #ffe0a1,
+    #e99042,
+    #8f3d1b,
+    transparent
+  );
+
+  box-shadow:
+    0 0 8px #e66a21,
+    0 0 18px rgba(230,80,20,.45);
+}
+
+/* INNER METAL BORDER */
+
+#guild-calendar .war-frame::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+
+  border: 1px solid rgba(204,125,65,.55);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* DECORATIVE CORNERS */
+
+#guild-calendar .war-corner {
+  position: absolute;
+  z-index: 5;
+
+  color: #e4a461 !important;
+  font-size: 28px !important;
+  line-height: 1;
+
+  text-shadow:
+    0 0 6px #f28b36,
+    0 0 15px rgba(220,85,20,.5),
+    0 2px 4px #000;
+}
+
+#guild-calendar .war-tl {
+  top: -15px;
+  left: -13px;
+}
+
+#guild-calendar .war-tr {
+  top: -15px;
+  right: -13px;
+}
+
+#guild-calendar .war-bl {
+  bottom: -15px;
+  left: -13px;
+}
+
+#guild-calendar .war-br {
+  bottom: -15px;
+  right: -13px;
+}
+
+/* ==========================================
+   DARK IRON INTERIOR
+========================================== */
+
+#guild-calendar .war-interior {
+  position: relative;
+  background: linear-gradient(
+    145deg,
+    #1c120c,
+    #0d0907 50%,
+    #1a100b
+  ) !important;
+
+  border: 1px solid #6c4025 !important;
+  padding: 10px !important;
+}
+
+/* BRONZE NAVIGATION */
+
+#guild-calendar .war-toolbar {
+  padding: 8px 8px 18px !important;
+  border-bottom: 1px solid #654027;
+  margin-bottom: 0;
+}
+
+#guild-calendar .war-month {
+  color: #f2dfc0 !important;
+  font-family: Georgia,serif !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+  text-shadow: 0 2px 5px #000;
+}
+
+#guild-calendar .war-btn {
+  color: #f2dfc0 !important;
+
+  background: linear-gradient(
+    180deg,
+    #2a1b12,
+    #100b08
+  ) !important;
+
+  border: 1px solid #a36536 !important;
+  border-radius: 22px !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,200,120,.15),
+    0 2px 5px rgba(0,0,0,.5);
+}
+
+#guild-calendar button.war-btn:hover {
+  background: #70321d !important;
+  border-color: #e3a35d !important;
+}
+
+/* ==========================================
+   BRONZE CALENDAR GRID
+========================================== */
+
+#guild-calendar .war-grid {
+  background: #0c0806 !important;
+  border: 1px solid #785032 !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+/* WEEKDAY HEADERS */
+
+#guild-calendar .war-weekday {
+  background: linear-gradient(
+    180deg,
+    #28180f,
+    #140d09
+  ) !important;
+
+  color: #d99b5d !important;
+  border-color: #654027 !important;
+
+  font-family: Georgia,serif !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  letter-spacing: 1px;
+
+  text-shadow: 0 2px 3px #000;
+}
+
+/* INDIVIDUAL DAYS */
+
+#guild-calendar .war-day {
+  background: linear-gradient(
+    145deg,
+    #130e0a,
+    #0d0a08
+  ) !important;
+
+  border-color: #493020 !important;
+  min-height: 105px !important;
+
+  transition: background .2s ease;
+}
+
+#guild-calendar .war-day:hover {
+  background: #21150e !important;
+}
+
+/* OUTSIDE MONTH */
+
+#guild-calendar .war-day.outside {
+  background: #0a0806 !important;
+}
+
+/* GOLD DATE NUMBERS */
+
+#guild-calendar .war-date {
+  color: #f2dfc0 !important;
+  font-family: Georgia,serif !important;
+  font-size: 13px !important;
+  font-weight: bold !important;
+}
+
+/* TODAY — RED AND GOLD */
+
+#guild-calendar .war-day.today {
+  background: #21120d !important;
+}
+
+#guild-calendar .war-day.today .war-date {
+  color: #fff4df !important;
+  background: linear-gradient(
+    145deg,
+    #d13220,
+    #7a160f
+  ) !important;
+
+  border: 2px solid #e89a50 !important;
+
+  box-shadow:
+    0 0 0 2px #44140b,
+    0 0 12px rgba(235,55,20,.75) !important;
+}
+
+/* ==========================================
+   RAID / DUNGEON EVENTS
+========================================== */
+
+#guild-calendar .war-event {
+  color: #ffe6c2 !important;
+
+  background: linear-gradient(
+    90deg,
+    #922a1b,
+    #46140e
+  ) !important;
+
+  border: 1px solid #b94d2d !important;
+  border-left: 3px solid #e7a15a !important;
+
+  border-radius: 3px !important;
+
+  box-shadow:
+    0 2px 5px rgba(0,0,0,.5),
+    inset 0 1px 0 rgba(255,190,100,.12);
+
+  transition: .2s ease;
+}
+
+#guild-calendar .war-event:hover {
+  background: #b13c23 !important;
+  border-color: #f0ad65 !important;
+  transform: translateY(-1px);
+}
+
+/* STATUS */
+
+#guild-calendar .war-status {
+  color: #cba77e !important;
+  font-size: 12px;
+  padding: 15px 5px 5px;
+}
+
+/* ==========================================
+   BATTLE FOOTER
+========================================== */
+
+#guild-calendar .war-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  margin-top: 35px !important;
+
+  color: #e8c99b !important;
+  font-family: Georgia,serif !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  letter-spacing: 5px !important;
+
+  text-shadow: 0 2px 5px #000;
+}
+
+#guild-calendar .war-bottom::before,
+#guild-calendar .war-bottom::after {
+  content: "";
+  width: 75px;
+  max-width: 10vw;
+  height: 1px;
+  margin: 0 15px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #c17b40
+  );
+}
+
+#guild-calendar .war-bottom::after {
+  transform: rotate(180deg);
+}
+
+#guild-calendar .war-bottom span {
+  color: #d58b4a !important;
+  font-size: 18px;
+  text-shadow: 0 0 8px #b94d20;
+}
+
+/* GOOGLE CALENDAR LINK */
+
+#guild-calendar .war-google {
+  color: #e5a76c !important;
+  font-size: 12px;
+  margin-top: 15px;
+  text-decoration: none !important;
+}
+
+#guild-calendar .war-google:hover {
+  color: #ffe0a1 !important;
+  text-decoration: underline !important;
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width:768px) {
+
+  #guild-calendar.butchers-war-calendar {
+    padding: 45px 12px 65px !important;
+  }
+
+  #guild-calendar .war-title {
+    font-size: clamp(25px,7vw,40px) !important;
+    letter-spacing: 0 !important;
+  }
+
+  #guild-calendar .war-subtitle {
+    font-size: 10px !important;
+    letter-spacing: 1px !important;
+  }
+
+  #guild-calendar .war-slogan {
+    font-size: 10px !important;
+    letter-spacing: 1px !important;
+  }
+
+  #guild-calendar .war-frame {
+    padding: 4px !important;
+  }
+
+  #guild-calendar .war-interior {
+    padding: 3px !important;
+  }
+
+  #guild-calendar .war-day {
+    min-height: 75px !important;
+    padding: 4px 2px !important;
+  }
+
+  #guild-calendar .war-weekday {
+    font-size: 10px !important;
+    padding: 9px 0 !important;
+  }
+
+  #guild-calendar .war-date {
+    font-size: 11px !important;
+  }
+
+  #guild-calendar .war-event {
+    font-size: 9px !important;
+    padding: 3px 2px !important;
+  }
+
+  #guild-calendar .war-bottom {
+    font-size: 10px !important;
+    letter-spacing: 1px !important;
+  }
+}
+
+</style>
+
+<!-- END WAR CALENDAR VISUAL UPGRADE -->
 </body>
 </html>
