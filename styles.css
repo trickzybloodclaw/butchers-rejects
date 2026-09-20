@@ -1552,3 +1552,11 @@ button[hidden] {
     box-shadow: none !important;
     border: none !important;
 }
+/* REMOVE EXTRA ORANGE LINES FROM FRAMES */
+
+body.cinematic-site .tile::before,
+body.cinematic-site .member::before,
+body.cinematic-site .news-card::before {
+    content: none !important;
+    display: none !important;
+}
