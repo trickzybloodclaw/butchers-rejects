@@ -1,0 +1,156 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#110e0c">
+  <title>Guild Calendar | The Butchers Rejects</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: #e8d7b5;
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(ellipse at top, #512019 0%, transparent 55%),
+        #110e0c;
+    }
+
+    header {
+      padding: 22px 18px;
+      text-align: center;
+      border-bottom: 1px solid #654031;
+      background: #130e0c;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: #e8d7b5;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    h1, h2 {
+      font-family: Georgia, serif;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 5vw, 48px);
+    }
+
+    .intro {
+      max-width: 700px;
+      margin: 14px auto 0;
+      color: #c9b59a;
+      line-height: 1.6;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 16px 60px;
+    }
+
+    .calendar-frame {
+      overflow: hidden;
+      border: 1px solid #784331;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 15px 45px #0008;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: 750px;
+      border: 0;
+    }
+
+    .note {
+      text-align: center;
+      color: #c9b59a;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .discord {
+      display: block;
+      width: fit-content;
+      margin: 26px auto 0;
+      padding: 15px 25px;
+      background: #8f281e;
+      border: 1px solid #c04b36;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      iframe { height: 650px; }
+      main { padding: 16px 8px 40px; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a class="back" href="index.html">← BACK TO THE WARBAND</a>
+    <h1>⚔ GUILD WAR CALENDAR ⚔</h1>
+    <p class="intro">
+      Raids, dungeons, and guild gatherings.
+      All event times are shown in Atlantic Time.
+    </p>
+  </header>
+
+  <main>
+    <div class="calendar-frame">
+      <iframe
+        id="guildCalendar"
+        title="The Butchers Rejects guild event calendar"
+        loading="lazy">
+      </iframe>
+    </div>
+
+    <p class="note">
+      Officers manage events through Google Calendar.
+      Click an event to see its details.
+    </p>
+
+    <a
+      class="discord"
+      href="https://discord.gg/cuGad4an"
+      target="_blank"
+      rel="noopener noreferrer">
+      JOIN OUR DISCORD ↗
+    </a>
+  </main>
+
+  <script>
+    // REPLACE THIS WITH YOUR ACTUAL GOOGLE CALENDAR ID
+    const calendarId = "PASTE_YOUR_CALENDAR_ID_HERE";
+
+    const params = new URLSearchParams({
+      src: calendarId,
+      ctz: "America/Halifax",
+      mode: "MONTH",
+      showTitle: "0",
+      showPrint: "0",
+      showCalendars: "0",
+      bgcolor: "#ffffff"
+    });
+
+    document.getElementById("guildCalendar").src =
+      "https://calendar.google.com/calendar/embed?" +
+      params.toString();
+  </script>
+</body>
+</html>
