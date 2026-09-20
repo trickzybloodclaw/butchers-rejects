@@ -4225,5 +4225,80 @@ body.cinematic-site .warband .section-rule {
     }
 }
 </style>
+<script>
+/* ADD 3 MORE WAR COUNCIL CARDS */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Find the existing Guild Master card
+    const guildMaster = [...document.querySelectorAll("*")]
+        .find(el =>
+            el.children.length === 0 &&
+            el.textContent.trim().toUpperCase() === "GUILD MASTER"
+        );
+
+    if (!guildMaster) return;
+
+    // Find the card containing Guild Master
+    const card = guildMaster.closest(
+        ".member-card, .roster-card, .card, article"
+    );
+
+    if (!card) return;
+
+    // Find the container holding all three cards
+    const container = card.parentElement;
+
+    if (!container) return;
+
+    // Prevent duplicate cards
+    if (container.dataset.extraCouncilCards === "true") return;
+
+    // Get the first three original cards
+    const originalCards = [...container.children].slice(0, 3);
+
+    if (originalCards.length !== 3) return;
+
+    // Clone all three cards
+    originalCards.forEach(function(original) {
+
+        const clone = original.cloneNode(true);
+
+        // Remove duplicate HTML IDs
+        clone.querySelectorAll("[id]").forEach(el => {
+            el.removeAttribute("id");
+        });
+
+        clone.removeAttribute("id");
+
+        // Add the copy underneath
+        container.appendChild(clone);
+
+    });
+
+    container.dataset.extraCouncilCards = "true";
+
+    // Keep three cards per row
+    container.style.display = "grid";
+    container.style.gridTemplateColumns =
+        "repeat(3, minmax(0, 1fr))";
+
+    container.style.gap = "20px";
+
+    // Mobile support
+    const style = document.createElement("style");
+
+    style.textContent = `
+        @media (max-width: 850px) {
+            [data-extra-council-cards="true"] {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    `;
+
+    document.head.appendChild(style);
+
+});
+</script>
 </body>
 </html>
