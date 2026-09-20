@@ -1529,7 +1529,65 @@ body.cinematic-site .ribbon {
   
 <!-- ==========================================
  BUTCHERS REJECTS — WAR CALENDAR VISUAL UPGRADE
- Paste once, immediately before </body>
+ Paste once, immediately before <script>
+/* Gallery: hide section eyebrow only; preserve third card heading. */
+(function () {
+  "use strict";
+  function repairGallery() {
+    const gallery = document.getElementById("galleryCards");
+    const section = document.getElementById("gallery");
+    if (!gallery || !section) return;
+
+    // Preserve the original removal of the section's small label.
+    const eyebrow = section.querySelector(":scope > .eyebrow");
+    if (eyebrow && eyebrow.textContent.trim() === "SPOILS OF WAR") {
+      eyebrow.style.setProperty("display", "none", "important");
+    }
+
+    const cards = gallery.children;
+    if (cards.length < 3) return;
+    const firstTitle = Array.from(cards[0].querySelectorAll("*"))
+      .find(el => el.children.length === 0 &&
+        el.textContent.trim() === "THE FIRST VICTORY");
+    const third = cards[2];
+    const caption = Array.from(third.querySelectorAll("*"))
+      .find(el => el.children.length === 0 &&
+        el.textContent.trim() === "Show off your greatest victories.");
+    if (!caption) return;
+
+    let title = Array.from(third.querySelectorAll("*"))
+      .find(el => el.children.length === 0 &&
+        el.textContent.trim() === "SPOILS OF WAR");
+    if (!title && firstTitle) {
+      title = firstTitle.cloneNode(true);
+      title.textContent = "SPOILS OF WAR";
+      title.removeAttribute("id");
+      caption.before(title);
+    }
+    if (title) {
+      title.style.removeProperty("display");
+      title.style.removeProperty("visibility");
+      title.style.removeProperty("opacity");
+    }
+  }
+
+  function start() {
+    repairGallery();
+    const gallery = document.getElementById("galleryCards");
+    if (gallery) {
+      new MutationObserver(repairGallery).observe(gallery, {
+        childList: true, subtree: true
+      });
+    }
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start, { once: true });
+  } else {
+    start();
+  }
+})();
+</script>
+</body>
 ========================================== -->
 
 <style>
@@ -3439,336 +3497,7 @@ body.cinematic-site .story > p:not(.eyebrow):not(.lead) {
 }
 </style>
 
-<script>
-(function () {
-    "use strict";
 
-    let view = "MONTH";
-    let selectedDate = new Date();
-    let monthNavigation = null;
-    let applying = false;
-
-    const gridId = "warGrid";
-
-    function dateKey(date) {
-        return [
-            date.getFullYear(),
-            String(date.getMonth() + 1).padStart(2, "0"),
-            String(date.getDate()).padStart(2, "0")
-        ].join("-");
-    }
-
-    function addDays(date, amount) {
-        const result = new Date(date);
-        result.setDate(result.getDate() + amount);
-        return result;
-    }
-
-    function getCalendar() {
-        return document.getElementById("guild-calendar");
-    }
-
-    function getDisplayedMonth() {
-        const label = document.getElementById("warMonthLabel");
-        if (!label) return null;
-
-        const date = new Date("1 " + label.textContent.trim());
-        return isNaN(date.getTime()) ? null : date;
-    }
-
-    function getCells() {
-        const grid = document.getElementById(gridId);
-        const month = getDisplayedMonth();
-
-        if (!grid || !month) return [];
-
-        const firstDay = new Date(
-            month.getFullYear(),
-            month.getMonth(),
-            1
-        ).getDay();
-
-        return [...grid.querySelectorAll(".war-day")].map(
-            (cell, index) => ({
-                cell,
-                date: new Date(
-                    month.getFullYear(),
-                    month.getMonth(),
-                    index - firstDay + 1
-                )
-            })
-        );
-    }
-
-    function updateView() {
-        const grid = document.getElementById(gridId);
-        const label = document.getElementById("warMonthLabel");
-
-        if (!grid || !label || applying) return;
-
-        applying = true;
-
-        grid.classList.remove("view-week", "view-day");
-
-        const cells = getCells();
-
-        const weekdays = grid.querySelectorAll(".war-weekday");
-
-        const month = getDisplayedMonth();
-
-        if (view === "MONTH") {
-            weekdays.forEach(day => {
-                day.style.display = "";
-            });
-
-            cells.forEach(({cell}) => {
-                cell.style.display = "";
-            });
-
-            applying = false;
-            return;
-        }
-
-        const selected = dateKey(selectedDate);
-
-        const weekStart = new Date(selectedDate);
-        weekStart.setDate(
-            weekStart.getDate() - weekStart.getDay()
-        );
-
-        const weekEnd = addDays(weekStart, 6);
-
-        if (view === "WEEK") {
-            grid.classList.add("view-week");
-
-            weekdays.forEach(day => {
-                day.style.display = "";
-            });
-
-            cells.forEach(({cell, date}) => {
-                cell.style.display =
-                    date >= weekStart && date <= weekEnd
-                        ? ""
-                        : "none";
-            });
-
-            label.textContent =
-                weekStart.toLocaleDateString("en-CA", {
-                    month: "short",
-                    day: "numeric"
-                }) +
-                " – " +
-                weekEnd.toLocaleDateString("en-CA", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric"
-                });
-        }
-
-        if (view === "DAY") {
-            grid.classList.add("view-day");
-
-            weekdays.forEach(day => {
-                day.style.display = "none";
-            });
-
-            cells.forEach(({cell, date}) => {
-                cell.style.display =
-                    dateKey(date) === selected
-                        ? ""
-                        : "none";
-            });
-
-            label.textContent =
-                selectedDate.toLocaleDateString("en-CA", {
-                    weekday: "long",
-                    month: "long",
-                    day: "numeric",
-                    year: "numeric"
-                });
-        }
-
-        applying = false;
-    }
-
-    function restoreMonthLabel() {
-        const label = document.getElementById("warMonthLabel");
-        const grid = document.getElementById(gridId);
-
-        if (!label || !grid) return;
-
-        /* Store the real month separately so filtering
-           never confuses the existing calendar renderer. */
-
-        if (grid.dataset.realMonth) {
-            label.textContent = grid.dataset.realMonth;
-        }
-    }
-
-    function navigate(amount) {
-        selectedDate = addDays(
-            selectedDate,
-            view === "WEEK" ? amount * 7 : amount
-        );
-
-        const month = getDisplayedMonth();
-
-        if (!month) return;
-
-        if (
-            selectedDate.getFullYear() !== month.getFullYear() ||
-            selectedDate.getMonth() !== month.getMonth()
-        ) {
-            const button = document.getElementById(
-                amount > 0 ? "warNext" : "warPrev"
-            );
-
-            if (button) {
-                monthNavigation = true;
-                restoreMonthLabel();
-                button.click();
-                monthNavigation = false;
-            }
-        }
-
-        updateView();
-    }
-
-    function install() {
-        const calendar = getCalendar();
-        const grid = document.getElementById(gridId);
-
-        if (!calendar || !grid) return false;
-
-        if (calendar.dataset.viewsInstalled) return true;
-
-        calendar.dataset.viewsInstalled = "true";
-
-        const controls =
-            calendar.querySelectorAll(".war-toolbar .war-controls");
-
-        if (!controls.length) return false;
-
-        const container = controls[controls.length - 1];
-
-        container.innerHTML = `
-            <select id="warViewSelect"
-                    aria-label="Calendar view">
-                <option value="MONTH">MONTH</option>
-                <option value="WEEK">WEEK</option>
-                <option value="DAY">DAY</option>
-            </select>
-        `;
-
-        const select =
-            document.getElementById("warViewSelect");
-
-        select.addEventListener("change", function () {
-            restoreMonthLabel();
-
-            view = this.value;
-
-            updateView();
-        });
-
-        /* Clicking a date opens that day */
-
-        grid.addEventListener("click", function (event) {
-            const dateElement = event.target.closest(".war-date");
-
-            if (!dateElement) return;
-
-            const cells = getCells();
-
-            const match = cells.find(
-                item => item.cell.contains(dateElement)
-            );
-
-            if (!match) return;
-
-            selectedDate = match.date;
-
-            restoreMonthLabel();
-
-            view = "DAY";
-            select.value = "DAY";
-
-            updateView();
-        });
-
-        /* Week and day arrow navigation */
-
-        ["warPrev", "warNext"].forEach(id => {
-            const button = document.getElementById(id);
-
-            if (!button) return;
-
-            button.addEventListener("click", function (event) {
-                if (view === "MONTH" || monthNavigation) return;
-
-                event.preventDefault();
-                event.stopImmediatePropagation();
-
-                navigate(id === "warNext" ? 1 : -1);
-            }, true);
-        });
-
-        /* Today button */
-
-        const today = document.getElementById("warToday");
-
-        if (today) {
-            today.addEventListener("click", function () {
-                selectedDate = new Date();
-                view = "MONTH";
-                select.value = "MONTH";
-            }, true);
-        }
-
-        /* Reapply view when Google events reload */
-
-        const observer = new MutationObserver(function () {
-            if (applying) return;
-
-            const currentGrid = document.getElementById(gridId);
-
-            if (!currentGrid) return;
-
-            const label = document.getElementById("warMonthLabel");
-
-            if (label && view === "MONTH") {
-                currentGrid.dataset.realMonth = label.textContent;
-            }
-
-            updateView();
-        });
-
-        observer.observe(grid, {
-            childList: true
-        });
-
-        grid.dataset.realMonth =
-            document.getElementById("warMonthLabel").textContent;
-
-        updateView();
-
-        return true;
-    }
-
-    /* Wait for your existing custom calendar to install */
-
-    window.addEventListener("load", function () {
-        const timer = setInterval(function () {
-            if (install()) clearInterval(timer);
-        }, 100);
-
-        setTimeout(function () {
-            clearInterval(timer);
-        }, 10000);
-    });
-
-})();
-</script>
 <script>
 /* RENAME OUR WARBAND TO BENEATH OUR BANNER */
 
@@ -4770,37 +4499,6 @@ body.cinematic-site #roster .section-title {
     text-align: center !important;
 }
 </style>
-<script>
-/* REMOVE SPOILS OF WAR TEXT */
-
-(function () {
-    function removeSpoilsText() {
-        document.querySelectorAll(
-            "p, span, div, h1, h2, h3, h4, h5, h6"
-        ).forEach(function(el) {
-
-            if (
-                el.children.length === 0 &&
-                el.textContent.trim().toUpperCase() ===
-                "SPOILS OF WAR"
-            ) {
-                el.style.setProperty(
-                    "display", "none", "important"
-                );
-            }
-
-        });
-    }
-
-    if (document.readyState === "loading") {
-        document.addEventListener(
-            "DOMContentLoaded", removeSpoilsText
-        );
-    } else {
-        removeSpoilsText();
-    }
-})();
-</script>
 <style>
 /* CENTRE THE BATTLE CHRONICLES HEADING */
 
@@ -4814,37 +4512,7 @@ body.cinematic-site #gallery .section-title {
     text-align: center !important;
 }
 </style>
-<script>
-/* REMOVE SPOILS OF WAR TEXT */
 
-(function () {
-    function removeSpoilsText() {
-        document.querySelectorAll(
-            "p, span, div, h1, h2, h3, h4, h5, h6"
-        ).forEach(function(el) {
-
-            if (
-                el.children.length === 0 &&
-                el.textContent.trim().toUpperCase() ===
-                "SPOILS OF WAR"
-            ) {
-                el.style.setProperty(
-                    "display", "none", "important"
-                );
-            }
-
-        });
-    }
-
-    if (document.readyState === "loading") {
-        document.addEventListener(
-            "DOMContentLoaded", removeSpoilsText
-        );
-    } else {
-        removeSpoilsText();
-    }
-})();
-</script>
 <script>
 /* REMOVE THE WAR DRUMS ECHO */
 
@@ -4960,241 +4628,61 @@ body.cinematic-site #gallery .section-title {
 })();
 </script>
 <script>
-/* ADD SPOILS OF WAR TO THIRD GALLERY BOX */
-
+/* Gallery: hide section eyebrow only; preserve third card heading. */
 (function () {
-    function addSpoilsHeading() {
-        const descriptions = document.querySelectorAll(
-            "p, div, span"
-        );
+  "use strict";
+  function repairGallery() {
+    const gallery = document.getElementById("galleryCards");
+    const section = document.getElementById("gallery");
+    if (!gallery || !section) return;
 
-        for (const el of descriptions) {
-            if (
-                el.children.length === 0 &&
-                el.textContent.trim() ===
-                "Show off your greatest victories."
-            ) {
-                // Prevent duplicate headings
-                if (
-                    el.previousElementSibling?.textContent
-                    .trim() === "SPOILS OF WAR"
-                ) return;
-
-                // Create matching heading
-                const heading = document.createElement("h3");
-                heading.textContent = "SPOILS OF WAR";
-
-                // Match existing gallery heading styling
-                const firstHeading = [...document.querySelectorAll("h3")]
-                    .find(h =>
-                        h.textContent.trim() ===
-                        "THE FIRST VICTORY"
-                    );
-
-                if (firstHeading) {
-                    heading.className = firstHeading.className;
-                    heading.style.cssText =
-                        firstHeading.style.cssText;
-                }
-
-                el.parentNode.insertBefore(heading, el);
-                return;
-            }
-        }
+    // Preserve the original removal of the section's small label.
+    const eyebrow = section.querySelector(":scope > .eyebrow");
+    if (eyebrow && eyebrow.textContent.trim() === "SPOILS OF WAR") {
+      eyebrow.style.setProperty("display", "none", "important");
     }
 
-    if (document.readyState === "loading") {
-        document.addEventListener(
-            "DOMContentLoaded", addSpoilsHeading
-        );
-    } else {
-        addSpoilsHeading();
+    const cards = gallery.children;
+    if (cards.length < 3) return;
+    const firstTitle = Array.from(cards[0].querySelectorAll("*"))
+      .find(el => el.children.length === 0 &&
+        el.textContent.trim() === "THE FIRST VICTORY");
+    const third = cards[2];
+    const caption = Array.from(third.querySelectorAll("*"))
+      .find(el => el.children.length === 0 &&
+        el.textContent.trim() === "Show off your greatest victories.");
+    if (!caption) return;
+
+    let title = Array.from(third.querySelectorAll("*"))
+      .find(el => el.children.length === 0 &&
+        el.textContent.trim() === "SPOILS OF WAR");
+    if (!title && firstTitle) {
+      title = firstTitle.cloneNode(true);
+      title.textContent = "SPOILS OF WAR";
+      title.removeAttribute("id");
+      caption.before(title);
     }
-})();
-</script>
-<script>
-/* ADD SPOILS OF WAR TO THIRD GALLERY BOX */
-
-(function () {
-    function addSpoilsHeading() {
-        const descriptions = document.querySelectorAll(
-            "p, div, span"
-        );
-
-        for (const el of descriptions) {
-            if (
-                el.children.length === 0 &&
-                el.textContent.trim() ===
-                "Show off your greatest victories."
-            ) {
-                // Prevent duplicate headings
-                if (
-                    el.previousElementSibling?.textContent
-                    .trim() === "SPOILS OF WAR"
-                ) return;
-
-                // Create matching heading
-                const heading = document.createElement("h3");
-                heading.textContent = "SPOILS OF WAR";
-
-                // Match existing gallery heading styling
-                const firstHeading = [...document.querySelectorAll("h3")]
-                    .find(h =>
-                        h.textContent.trim() ===
-                        "THE FIRST VICTORY"
-                    );
-
-                if (firstHeading) {
-                    heading.className = firstHeading.className;
-                    heading.style.cssText =
-                        firstHeading.style.cssText;
-                }
-
-                el.parentNode.insertBefore(heading, el);
-                return;
-            }
-        }
+    if (title) {
+      title.style.removeProperty("display");
+      title.style.removeProperty("visibility");
+      title.style.removeProperty("opacity");
     }
+  }
 
-    if (document.readyState === "loading") {
-        document.addEventListener(
-            "DOMContentLoaded", addSpoilsHeading
-        );
-    } else {
-        addSpoilsHeading();
+  function start() {
+    repairGallery();
+    const gallery = document.getElementById("galleryCards");
+    if (gallery) {
+      new MutationObserver(repairGallery).observe(gallery, {
+        childList: true, subtree: true
+      });
     }
-})();
-</script>
-<script>
-/* FIX MISSING SPOILS OF WAR HEADING */
-
-(function () {
-
-    function fixSpoilsOfWar() {
-
-        const elements = document.querySelectorAll("*");
-
-        for (const el of elements) {
-
-            if (
-                el.children.length === 0 &&
-                el.textContent.trim().includes(
-                    "Show off your greatest victories."
-                )
-            ) {
-
-                // Find the existing heading in the first card
-                const original = [...document.querySelectorAll("*")]
-                    .find(item =>
-                        item.children.length === 0 &&
-                        item.textContent.trim() ===
-                        "THE FIRST VICTORY"
-                    );
-
-                // Prevent duplicate headings
-                if (
-                    el.parentElement.textContent.includes(
-                        "SPOILS OF WAR"
-                    )
-                ) return;
-
-                // Create matching heading
-                const heading = original
-                    ? original.cloneNode(true)
-                    : document.createElement("h3");
-
-                heading.textContent = "SPOILS OF WAR";
-
-                if (!original) {
-                    heading.style.color = "#EAD9BC";
-                    heading.style.fontFamily = "Georgia, serif";
-                    heading.style.fontWeight = "bold";
-                    heading.style.fontSize = "17px";
-                    heading.style.marginBottom = "12px";
-                }
-
-                // Insert above description
-                el.parentElement.insertBefore(heading, el);
-
-                return;
-            }
-        }
-    }
-
-    if (document.readyState === "loading") {
-        document.addEventListener(
-            "DOMContentLoaded",
-            fixSpoilsOfWar
-        );
-    } else {
-        fixSpoilsOfWar();
-    }
-
-})();
-</script>
-<script>
-/* FIX SPOILS OF WAR - THIRD GALLERY CARD */
-
-(function () {
-
-    function fixGallery() {
-
-        // Find the first card's heading
-        const firstHeading = [...document.querySelectorAll("*")]
-            .find(el =>
-                el.children.length === 0 &&
-                el.textContent.trim() === "THE FIRST VICTORY"
-            );
-
-        if (!firstHeading) return;
-
-        // Find the third card's description
-        const description = [...document.querySelectorAll("*")]
-            .find(el =>
-                el.children.length === 0 &&
-                el.textContent.trim() ===
-                "Show off your greatest victories."
-            );
-
-        if (!description) return;
-
-        // Check if the heading already exists
-        const existing = description.parentElement
-            .querySelector(".spoils-heading");
-
-        if (existing) return;
-
-        // Copy the first card's heading
-        const heading = firstHeading.cloneNode(true);
-
-        heading.textContent = "SPOILS OF WAR";
-        heading.classList.add("spoils-heading");
-        heading.removeAttribute("id");
-
-        // Insert it above the description
-        description.before(heading);
-
-    }
-
-    // Run after the page loads
-    if (document.readyState === "loading") {
-        document.addEventListener(
-            "DOMContentLoaded", fixGallery
-        );
-    } else {
-        fixGallery();
-    }
-
-    // Also handle gallery cards loaded later
-    const observer = new MutationObserver(function () {
-        fixGallery();
-    });
-
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
-
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start, { once: true });
+  } else {
+    start();
+  }
 })();
 </script>
 </body>
