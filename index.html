@@ -3904,5 +3904,82 @@ body.cinematic-site .warband .lead::after {
     }
 }
 </style>
+<style>
+/* WAR COUNCIL - MATCH CALENDAR HEADING */
+
+.war-council-description {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 18px !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 25px auto 35px !important;
+
+    color: #EAD9BC !important;
+    font-family: Georgia, serif !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    line-height: 1.5 !important;
+}
+
+/* MATCHING BRONZE LINES */
+
+.war-council-description::before,
+.war-council-description::after {
+    content: "" !important;
+    display: block !important;
+    flex: 0 0 90px !important;
+    height: 1px !important;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #A86A3C
+    ) !important;
+}
+
+.war-council-description::after {
+    transform: rotate(180deg);
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    .war-council-description {
+        font-size: 13px !important;
+        gap: 8px !important;
+    }
+
+    .war-council-description::before,
+    .war-council-description::after {
+        flex-basis: 25px !important;
+    }
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    document.querySelectorAll("p, div, span").forEach(function(el) {
+
+        if (
+            el.children.length === 0 &&
+            el.textContent.includes(
+                "warriors who lead the charge beneath our banner"
+            )
+        ) {
+            el.textContent =
+                "Behold the warriors who lead the charge beneath our banner";
+
+            el.classList.add("war-council-description");
+        }
+
+    });
+
+});
+</script>
 </body>
 </html>
