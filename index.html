@@ -4876,5 +4876,88 @@ body.cinematic-site #gallery .section-title {
     }
 })();
 </script>
+<style>
+/* APPLICATION TEXT - MATCH RECRUITMENT SECTION */
+
+.guild-application-text {
+    max-width: 720px !important;
+    margin: 0 auto 20px !important;
+    padding: 0 15px !important;
+
+    text-align: center !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 17px !important;
+    font-weight: 600 !important;
+    line-height: 1.8 !important;
+    color: #EAD9BC !important;
+}
+
+/* SECOND PARAGRAPH */
+
+.guild-application-text.secondary {
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    line-height: 1.8 !important;
+    color: #D6C2A3 !important;
+    margin-top: 20px !important;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    .guild-application-text {
+        font-size: 15px !important;
+        padding: 0 12px !important;
+    }
+
+    .guild-application-text.secondary {
+        font-size: 13px !important;
+    }
+}
+</style>
+
+<script>
+/* APPLY STYLING TO EXISTING TEXT */
+
+(function () {
+
+    function styleApplicationText() {
+
+        document.querySelectorAll("p, div").forEach(function(el) {
+
+            if (el.children.length > 0) return;
+
+            const text = el.textContent.trim();
+
+            if (text.startsWith(
+                "Looking for a helpful, active Horde guild?"
+            )) {
+                el.classList.add("guild-application-text");
+            }
+
+            if (text.startsWith(
+                "Submit your application below."
+            )) {
+                el.classList.add(
+                    "guild-application-text",
+                    "secondary"
+                );
+            }
+
+        });
+
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded",
+            styleApplicationText
+        );
+    } else {
+        styleApplicationText();
+    }
+
+})();
+</script>
 </body>
 </html>
