@@ -1340,4 +1340,11 @@ button[hidden] {
   body.cinematic-site #gallery {
     background-color: transparent !important;
   }
+}/* DARK MODE — GUILD WAR CALENDAR */
+#guild-calendar iframe {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+#guild-calendar > div {
+  background: #111 !important;
 }
