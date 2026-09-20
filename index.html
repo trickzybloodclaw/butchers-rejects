@@ -388,6 +388,21 @@ src="https://calendar.google.com/calendar/embed?src=thebutchersrejects%40gmail.c
       }
     }, true);
   </script>
+<script>
+/* Move the existing calendar below War Cries & Announcements */
+document.addEventListener("DOMContentLoaded", function () {
+  const calendar = document.getElementById("guild-calendar");
+  const announcement = [...document.querySelectorAll("*")]
+    .find(el =>
+      el.children.length === 0 &&
+      el.textContent.trim() === "THE NEXT BATTLE AWAITS"
+    );
 
+  if (!calendar || !announcement) return;
+
+  const section = announcement.closest("section");
+  if (section) section.insertAdjacentElement("afterend", calendar);
+});
+</script>
 </body>
 </html>
