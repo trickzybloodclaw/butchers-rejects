@@ -2582,5 +2582,14 @@ body.cinematic-site .ribbon {
     box-shadow: none !important;
 }
 </style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll("p").forEach(function (p) {
+    if (p.textContent.trim().includes("The war drums echo. The blood runs deep.")) {
+      p.style.display = "none";
+    }
+  });
+});
+</script>
 </body>
 </html>
