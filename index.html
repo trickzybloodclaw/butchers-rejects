@@ -2487,5 +2487,22 @@ body.cinematic-site #guild-calendar .war-bottom::after {
     display: none !important;
 }
 </style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const observer = new MutationObserver(function () {
+    const slogan = document.querySelector("#guild-calendar .war-slogan");
+
+    if (slogan) {
+      slogan.textContent = "✦ MARK THE DAY ✦ GATHER THE WARBAND ✦ PREPARE FOR WAR ✦";
+      observer.disconnect();
+    }
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+});
+</script>
 </body>
 </html>
