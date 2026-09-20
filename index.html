@@ -2463,5 +2463,29 @@ body.cinematic-site #guild-calendar .war-frame::before {
 
 /* Keep the interior untouched */
 </style>
+<style>
+/* REMOVE BLACK BAR BEHIND BATTLE & HONOR */
+
+body.cinematic-site #guild-calendar .war-bottom {
+    background: none !important;
+    background-color: transparent !important;
+    background-image: none !important;
+
+    box-shadow: none !important;
+    border: 0 !important;
+    outline: 0 !important;
+
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Remove decorative background layers */
+
+body.cinematic-site #guild-calendar .war-bottom::before,
+body.cinematic-site #guild-calendar .war-bottom::after {
+    content: none !important;
+    display: none !important;
+}
+</style>
 </body>
 </html>
