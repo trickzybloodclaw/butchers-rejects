@@ -3817,5 +3817,25 @@ body.cinematic-site .story > p:not(.eyebrow):not(.lead) {
     text-shadow: 0 2px 8px #000;
 }
 </style>
+<script>
+/* RENAME MEET THE WARBAND */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    document.querySelectorAll("h1, h2, h3").forEach(function(heading) {
+
+        if (heading.textContent.includes("MEET THE WARBAND")) {
+
+            heading.innerHTML = heading.innerHTML.replace(
+                /WARBAND/gi,
+                "WAR COUNCIL"
+            );
+
+        }
+
+    });
+
+});
+</script>
 </body>
 </html>
