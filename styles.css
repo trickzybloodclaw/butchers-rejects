@@ -337,3 +337,331 @@ button[hidden] {
     letter-spacing: 1px;
   }
 }
+
+/* =========================================
+   THE BUTCHERS REJECTS
+   CLEAN CINEMATIC MOBILE DESIGN
+   DESKTOP REMAINS UNCHANGED
+========================================= */
+
+@media screen and (max-width: 850px) {
+
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  /* MOBILE HEADER */
+
+  .cinematic-site > .top {
+    display: flex;
+    min-height: 68px;
+    padding: 12px 16px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .top .brand {
+    font-size: clamp(11px, 3.3vw, 15px);
+    letter-spacing: 0;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .top .sigil {
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+
+  .top .menu {
+    display: block;
+    flex-shrink: 0;
+    font-size: 25px;
+  }
+
+  /* HOMEPAGE */
+
+  .cinematic-site .cinematic-hero {
+    display: flex;
+    position: relative;
+    width: 100%;
+    min-height: calc(100svh - 68px);
+    padding: 0 20px 30px;
+    margin: 0;
+    overflow: hidden;
+    isolation: isolate;
+    background: #110e0c;
+    align-items: stretch;
+  }
+
+  /* NEVER SHOW DESKTOP ARTWORK SEPARATELY */
+
+  .cinematic-desktop {
+    display: none !important;
+  }
+
+  /* MOBILE CONTENT */
+
+  .cinematic-mobile {
+    display: flex !important;
+    position: relative;
+    z-index: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    max-width: 420px;
+    min-height: calc(100svh - 98px);
+    margin: 0 auto;
+    padding: 0 0 12px;
+    gap: 14px;
+    background: transparent !important;
+  }
+
+  /* ANIMATED BULL BACKGROUND */
+
+  .mobile-background-video {
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 50% !important;
+
+    width: 100% !important;
+    height: 68% !important;
+
+    transform: translateX(-50%) !important;
+
+    object-fit: cover !important;
+    object-position: center 20% !important;
+
+    z-index: -1 !important;
+    pointer-events: none !important;
+
+    border: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* HIDE DUPLICATE LOGO */
+
+  .cinematic-mobile .mobile-crest {
+    display: none !important;
+  }
+
+  /* SMOOTH DARK FADE */
+
+  .cinematic-site .cinematic-hero::after {
+    content: "";
+    display: block;
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+      to bottom,
+      transparent 20%,
+      transparent 35%,
+      rgba(17,14,12,0.5) 52%,
+      #110e0c 72%
+    );
+
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* MOTTO */
+
+  .cinematic-mobile .motto {
+    display: block;
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 340px;
+
+    margin: 0 0 8px;
+    padding: 0;
+
+    font-family: Georgia, serif;
+    font-size: clamp(15px, 4vw, 18px);
+    line-height: 1.5;
+    text-align: center;
+
+    color: #f1dfc2;
+    text-shadow: 0 2px 8px #000;
+  }
+
+  /* BUTTON CONTAINER */
+
+  .cinematic-mobile .actions {
+    display: flex;
+    position: relative;
+    z-index: 2;
+
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    max-width: 340px;
+
+    margin: 0;
+    padding: 0;
+    gap: 12px;
+  }
+
+  /* BUTTONS */
+
+  .cinematic-mobile .actions .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 54px;
+
+    padding: 14px 16px;
+    margin: 0;
+
+    font-size: 12px;
+    line-height: 1.4;
+    letter-spacing: 0.5px;
+
+    text-align: center;
+    white-space: normal;
+
+    border-radius: 4px;
+  }
+
+  /* SCROLL TO APPLY */
+
+  .cinematic-mobile .mobile-scroll {
+    display: block;
+    position: relative;
+    z-index: 2;
+
+    margin: 8px 0 0;
+    padding: 0;
+
+    font-size: 11px;
+    line-height: 1.5;
+    letter-spacing: 2px;
+
+    color: #e8d7b5;
+    text-align: center;
+  }
+
+  /* RIBBON */
+
+  .ribbon {
+    padding: 16px 12px;
+    font-size: 10px;
+    line-height: 1.8;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  /* ALL OTHER MOBILE SECTIONS */
+
+  .section {
+    width: 100%;
+    max-width: 100%;
+    padding: 60px 20px;
+  }
+
+  .section h2 {
+    font-size: clamp(28px, 8vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    overflow-wrap: break-word;
+  }
+
+  .section p {
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-wrap: break-word;
+  }
+
+  .section .lead {
+    font-size: 16px;
+  }
+
+  /* CARDS */
+
+  .three,
+  .cards,
+  .gallery,
+  .news .cards {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .tile,
+  .member,
+  .news-card,
+  .panel {
+    min-width: 0;
+    padding: 22px;
+  }
+
+  /* RECRUITMENT FORM */
+
+  .recruit {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+
+  .recruit > div {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .panel {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .panel input,
+  .panel select,
+  .panel textarea {
+    width: 100%;
+    max-width: 100%;
+    font-size: 16px;
+  }
+
+  /* FOOTER */
+
+  footer {
+    padding: 28px 20px;
+    gap: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+}
+
+/* SMALLER PHONES */
+
+@media screen and (max-width: 380px) {
+
+  .cinematic-site .cinematic-hero {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .cinematic-mobile .motto {
+    font-size: 14px;
+  }
+
+  .cinematic-mobile .actions .btn {
+    min-height: 48px;
+    font-size: 11px;
+  }
+
+  .section {
+    padding: 50px 16px;
+  }
+
+}
