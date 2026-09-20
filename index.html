@@ -5012,5 +5012,443 @@ body.cinematic-site #gallery .section-title {
     }
 })();
 </script>
+<!-- ====================================== -->
+<!-- THE BUTCHERS REJECTS - GUILD WAR TABLE -->
+<!-- ====================================== -->
+
+<style>
+#br-war-table {
+    max-width: 1200px;
+    margin: 65px auto;
+    padding: 25px;
+    color: #ead9bc;
+    font-family: Georgia, serif;
+}
+
+#br-war-table * {
+    box-sizing: border-box;
+}
+
+#br-war-table .war-heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#br-war-table .war-heading h2 {
+    color: #ead9bc;
+    font-size: clamp(32px, 5vw, 60px);
+    margin: 10px 0;
+    text-transform: uppercase;
+}
+
+#br-war-table .war-heading p {
+    color: #c77955;
+    letter-spacing: 3px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#br-war-table .war-subtitle {
+    text-align: center;
+    color: #d6c2a3;
+    margin-bottom: 25px;
+    font-family: Arial, sans-serif;
+}
+
+/* MAIN MAP */
+
+#br-war-table .war-map {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 350px;
+    overflow: hidden;
+
+    border: 2px solid #a86a3c;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 45%,
+            transparent 10%,
+            rgba(0,0,0,.75) 100%
+        ),
+        repeating-linear-gradient(
+            25deg,
+            transparent 0px,
+            transparent 55px,
+            rgba(168,106,60,.035) 56px
+        ),
+        linear-gradient(
+            135deg,
+            #30221b,
+            #15100e 60%,
+            #342019
+        );
+
+    box-shadow:
+        inset 0 0 90px #000,
+        0 0 25px rgba(168,106,60,.15);
+}
+
+/* MAP DECORATIONS */
+
+#br-war-table .war-map::before {
+    content: "";
+    position: absolute;
+    inset: 15px;
+    border: 1px solid rgba(168,106,60,.3);
+    pointer-events: none;
+}
+
+#br-war-table .map-title {
+    position: absolute;
+    top: 7%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #a86a3c;
+    letter-spacing: 5px;
+    font-size: clamp(11px, 1.5vw, 18px);
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+#br-war-table .map-compass {
+    position: absolute;
+    bottom: 7%;
+    right: 5%;
+    color: #a86a3c;
+    font-size: 35px;
+    opacity: .6;
+    pointer-events: none;
+}
+
+/* CLICKABLE LOCATIONS */
+
+#br-war-table .war-marker {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ead9bc;
+    font-family: Georgia, serif;
+}
+
+#br-war-table .marker-icon {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+
+    background: #241713;
+    border: 2px solid #a86a3c;
+    border-radius: 50%;
+
+    color: #ead9bc;
+    font-size: 23px;
+
+    box-shadow:
+        0 0 15px rgba(199,121,85,.35),
+        inset 0 0 12px #000;
+
+    transition: .25s ease;
+}
+
+#br-war-table .war-marker:hover .marker-icon,
+#br-war-table .war-marker:focus-visible .marker-icon,
+#br-war-table .war-marker.active .marker-icon {
+    border-color: #e0ad68;
+    box-shadow: 0 0 22px #a86a3c;
+    transform: scale(1.12);
+}
+
+#br-war-table .marker-name {
+    padding: 5px 9px;
+    background: rgba(12,9,8,.85);
+    border: 1px solid rgba(168,106,60,.4);
+    color: #ead9bc;
+
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* EVENT DETAILS */
+
+#br-war-table .war-details {
+    margin-top: 20px;
+    padding: 30px;
+
+    background: rgba(16,12,10,.94);
+    border: 1px solid #a86a3c;
+
+    box-shadow: inset 0 0 35px rgba(0,0,0,.5);
+}
+
+#br-war-table .detail-type {
+    color: #c77955;
+    font-size: 12px;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+#br-war-table .war-details h3 {
+    color: #ead9bc;
+    font-size: 28px;
+    margin: 12px 0;
+}
+
+#br-war-table .war-details p {
+    color: #d6c2a3;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+#br-war-table .detail-info {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #69442c;
+    color: #ead9bc;
+    font-family: Arial, sans-serif;
+    line-height: 2;
+}
+
+/* MOBILE */
+
+@media(max-width:600px) {
+    #br-war-table {
+        padding: 12px;
+        margin: 35px auto;
+    }
+
+    #br-war-table .war-map {
+        min-height: 430px;
+        aspect-ratio: auto;
+    }
+
+    #br-war-table .marker-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
+    }
+
+    #br-war-table .marker-name {
+        font-size: 9px;
+        letter-spacing: 0;
+    }
+
+    #br-war-table .war-details {
+        padding: 20px;
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    #br-war-table .marker-icon {
+        transition: none;
+    }
+}
+</style>
+
+
+<section id="br-war-table">
+
+    <div class="war-heading">
+        <p>✦ THE HORDE ANSWERS THE CALL ✦</p>
+
+        <h2>THE WAR TABLE</h2>
+    </div>
+
+    <p class="war-subtitle">
+        Choose your destination. Prepare for battle.
+    </p>
+
+    <div class="war-map" aria-label="Interactive guild war table">
+
+        <div class="map-title">
+            THE BUTCHERS REJECTS
+        </div>
+
+        <div class="map-compass">✧</div>
+
+        <!-- RAID LOCATION -->
+
+        <button class="war-marker"
+                style="top:35%;left:25%"
+                data-location="raid"
+                aria-label="View raid details">
+
+            <span class="marker-icon">⚔</span>
+            <span class="marker-name">RAID FRONT</span>
+
+        </button>
+
+        <!-- DUNGEON LOCATION -->
+
+        <button class="war-marker"
+                style="top:60%;left:55%"
+                data-location="dungeon"
+                aria-label="View dungeon details">
+
+            <span class="marker-icon">◆</span>
+            <span class="marker-name">DUNGEONS</span>
+
+        </button>
+
+        <!-- GUILD EVENT LOCATION -->
+
+        <button class="war-marker"
+                style="top:30%;left:75%"
+                data-location="guild"
+                aria-label="View guild event details">
+
+            <span class="marker-icon">✦</span>
+            <span class="marker-name">WAR CAMP</span>
+
+        </button>
+
+        <!-- COMMUNITY LOCATION -->
+
+        <button class="war-marker"
+                style="top:75%;left:30%"
+                data-location="community"
+                aria-label="View community details">
+
+            <span class="marker-icon">♜</span>
+            <span class="marker-name">GUILD HALL</span>
+
+        </button>
+
+    </div>
+
+    <!-- CLICKABLE EVENT DETAILS -->
+
+    <div class="war-details" id="br-war-details"
+         aria-live="polite">
+
+        <span class="detail-type" id="br-detail-type">
+            THE WAR COUNCIL
+        </span>
+
+        <h3 id="br-detail-title">
+            SELECT YOUR DESTINATION
+        </h3>
+
+        <p id="br-detail-description">
+            Select a location on the war table to
+            discover upcoming battles, dungeon runs,
+            and guild gatherings.
+        </p>
+
+        <div class="detail-info"
+             id="br-detail-info">
+            ⚔ The warband awaits your command.
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+/* =====================================
+   WAR TABLE - EVENT INFORMATION
+   EDIT THESE DETAILS ANYTIME
+===================================== */
+
+(function () {
+
+    const warEvents = {
+
+        raid: {
+            type: "⚔ RAID OPERATIONS",
+            title: "THE RAID FRONT",
+            description:
+                "Gather the warband and prepare to face mighty foes. Our guild raids together in pursuit of glory and hard-won victories.",
+            info:
+                "Status: Awaiting next raid announcement."
+        },
+
+        dungeon: {
+            type: "◆ DUNGEON OPERATIONS",
+            title: "THE DUNGEON FRONT",
+            description:
+                "Venture into dangerous dungeons alongside your fellow Rejects. Veterans and fresh meat fight together.",
+            info:
+                "Status: Dungeon groups forming."
+        },
+
+        guild: {
+            type: "✦ GUILD GATHERINGS",
+            title: "THE WAR CAMP",
+            description:
+                "Gather with the guild for community events, celebrations, and adventures across Azeroth.",
+            info:
+                "Status: Check the guild calendar for events."
+        },
+
+        community: {
+            type: "♜ THE GUILD HALL",
+            title: "THE BUTCHERS REJECTS",
+            description:
+                "Our warband stands united. Meet your fellow guild members, share your victories, and answer the call to battle.",
+            info:
+                "Status: The guild hall welcomes all Rejects."
+        }
+
+    };
+
+    const table = document.getElementById("br-war-table");
+
+    if (!table) return;
+
+    const markers = table.querySelectorAll(".war-marker");
+
+    const type = document.getElementById("br-detail-type");
+    const title = document.getElementById("br-detail-title");
+    const description =
+        document.getElementById("br-detail-description");
+    const info = document.getElementById("br-detail-info");
+
+    markers.forEach(function(marker) {
+
+        marker.addEventListener("click", function() {
+
+            const key = marker.dataset.location;
+            const event = warEvents[key];
+
+            if (!event) return;
+
+            markers.forEach(function(m) {
+                m.classList.remove("active");
+                m.setAttribute("aria-pressed", "false");
+            });
+
+            marker.classList.add("active");
+            marker.setAttribute("aria-pressed", "true");
+
+            type.textContent = event.type;
+            title.textContent = event.title;
+            description.textContent = event.description;
+            info.textContent = event.info;
+
+        });
+
+        marker.setAttribute("aria-pressed", "false");
+
+    });
+
+})();
+</script>
+
+<!-- END GUILD WAR TABLE -->
 </body>
 </html>
