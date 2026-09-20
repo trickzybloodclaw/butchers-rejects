@@ -4002,5 +4002,74 @@ body.cinematic-site .application > p:not(.eyebrow):not(.lead) {
     line-height: 1.8 !important;
 }
 </style>
+<style>
+/* WAR COUNCIL - REMOVE LONG TOP BAR */
+
+/* Hide the old decorative divider */
+body.cinematic-site .roster > hr,
+body.cinematic-site .warband > hr,
+body.cinematic-site .roster .section-rule,
+body.cinematic-site .warband .section-rule {
+    display: none !important;
+}
+
+/* Centre description and balance both sides */
+.war-council-description {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 18px !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 20px auto 35px !important;
+
+    text-align: center !important;
+    color: #EAD9BC !important;
+}
+
+/* Identical bronze lines on both sides */
+.war-council-description::before,
+.war-council-description::after {
+    content: "" !important;
+    display: block !important;
+
+    flex: 0 0 90px !important;
+    width: 90px !important;
+    height: 1px !important;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #A86A3C
+    ) !important;
+
+    border: none !important;
+    transform: none !important;
+}
+
+/* Mirror the right line */
+.war-council-description::after {
+    background: linear-gradient(
+        90deg,
+        #A86A3C,
+        transparent
+    ) !important;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .war-council-description {
+        gap: 8px !important;
+        font-size: 14px !important;
+    }
+
+    .war-council-description::before,
+    .war-council-description::after {
+        flex-basis: 25px !important;
+        width: 25px !important;
+    }
+}
+</style>
 </body>
 </html>
