@@ -665,3 +665,136 @@ button[hidden] {
   }
 
 }
+
+/* ==========================================
+   BUTCHERS REJECTS - MOBILE DESKTOP ARTWORK
+   MOBILE ONLY - DESKTOP UNCHANGED
+========================================== */
+
+@media screen and (max-width: 850px) {
+
+  /* Prevent horizontal scrolling */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  /* Hide duplicate mobile header */
+  .cinematic-site > .top {
+    display: none !important;
+  }
+
+  /* Full-width homepage */
+  .cinematic-site .cinematic-hero {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    background: #110e0c !important;
+  }
+
+  /* Show the original desktop artwork */
+  .cinematic-desktop {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    line-height: 0 !important;
+  }
+
+  /* Show the entire animated video */
+  .cinematic-desktop video.cinematic-picture {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    transform: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* Remove duplicate mobile video, logo and text */
+  .cinematic-mobile {
+    display: none !important;
+  }
+
+  /* Keep clickable areas over artwork */
+  .cinematic-links {
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 5 !important;
+    line-height: normal !important;
+  }
+
+  .cinematic-links .hotspot {
+    display: block !important;
+    position: absolute !important;
+    z-index: 6 !important;
+    border: 0 !important;
+    background: transparent !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+  }
+
+  /* Remove overlays that obscure artwork */
+  .cinematic-site .cinematic-hero::after {
+    display: none !important;
+  }
+
+  /* Remove unwanted empty space */
+  .cinematic-site .cinematic-hero,
+  .cinematic-desktop {
+    min-height: 0 !important;
+  }
+
+  /* Keep remaining website mobile-friendly */
+  .section {
+    width: 100%;
+    padding: 55px 18px;
+  }
+
+  .section h2 {
+    font-size: clamp(28px, 7.5vw, 42px);
+    line-height: 1.2;
+    overflow-wrap: break-word;
+  }
+
+  .section p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .three,
+  .cards,
+  .gallery,
+  .news .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .recruit {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .panel {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .panel input,
+  .panel select,
+  .panel textarea {
+    font-size: 16px;
+    max-width: 100%;
+  }
+
+}
