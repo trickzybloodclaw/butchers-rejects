@@ -5012,5 +5012,58 @@ body.cinematic-site #gallery .section-title {
     }
 })();
 </script>
+<script>
+/* ADD SPOILS OF WAR TO THIRD GALLERY BOX */
+
+(function () {
+    function addSpoilsHeading() {
+        const descriptions = document.querySelectorAll(
+            "p, div, span"
+        );
+
+        for (const el of descriptions) {
+            if (
+                el.children.length === 0 &&
+                el.textContent.trim() ===
+                "Show off your greatest victories."
+            ) {
+                // Prevent duplicate headings
+                if (
+                    el.previousElementSibling?.textContent
+                    .trim() === "SPOILS OF WAR"
+                ) return;
+
+                // Create matching heading
+                const heading = document.createElement("h3");
+                heading.textContent = "SPOILS OF WAR";
+
+                // Match existing gallery heading styling
+                const firstHeading = [...document.querySelectorAll("h3")]
+                    .find(h =>
+                        h.textContent.trim() ===
+                        "THE FIRST VICTORY"
+                    );
+
+                if (firstHeading) {
+                    heading.className = firstHeading.className;
+                    heading.style.cssText =
+                        firstHeading.style.cssText;
+                }
+
+                el.parentNode.insertBefore(heading, el);
+                return;
+            }
+        }
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded", addSpoilsHeading
+        );
+    } else {
+        addSpoilsHeading();
+    }
+})();
+</script>
 </body>
 </html>
