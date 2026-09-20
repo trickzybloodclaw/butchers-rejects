@@ -404,5 +404,44 @@ document.addEventListener("DOMContentLoaded", function () {
   if (section) section.insertAdjacentElement("afterend", calendar);
 });
 </script>
+  <script>
+/* KEEP ONE GUILD CALENDAR UNDER WAR CRIES & ANNOUNCEMENTS */
+document.addEventListener("DOMContentLoaded", function () {
+  // Remove any earlier calendar-moving scripts' effect by placing
+  // the surviving calendar after the announcements section.
+  const calendars = Array.from(
+    document.querySelectorAll('section[id="guild-calendar"]')
+  );
+
+  if (!calendars.length) return;
+
+  // Keep the calendar with a Google Calendar iframe if possible.
+  const calendar =
+    calendars.find(section =>
+      section.querySelector('iframe[src*="calendar.google.com"]')
+    ) || calendars[0];
+
+  // Remove duplicate calendar sections.
+  calendars.forEach(section => {
+    if (section !== calendar) section.remove();
+  });
+
+  // Find the announcement card by its heading.
+  const heading = Array.from(
+    document.querySelectorAll("h1, h2, h3, h4, h5, h6")
+  ).find(el =>
+    el.textContent.trim().toUpperCase() ===
+    "THE NEXT BATTLE AWAITS"
+  );
+
+  if (!heading) return;
+
+  // Find the section containing War Cries & Announcements.
+  const announcements = heading.closest("section");
+  if (!announcements) return;
+
+  announcements.insertAdjacentElement("afterend", calendar);
+});
+</script>
 </body>
 </html>
