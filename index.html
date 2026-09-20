@@ -5065,5 +5065,72 @@ body.cinematic-site #gallery .section-title {
     }
 })();
 </script>
+<script>
+/* FIX MISSING SPOILS OF WAR HEADING */
+
+(function () {
+
+    function fixSpoilsOfWar() {
+
+        const elements = document.querySelectorAll("*");
+
+        for (const el of elements) {
+
+            if (
+                el.children.length === 0 &&
+                el.textContent.trim().includes(
+                    "Show off your greatest victories."
+                )
+            ) {
+
+                // Find the existing heading in the first card
+                const original = [...document.querySelectorAll("*")]
+                    .find(item =>
+                        item.children.length === 0 &&
+                        item.textContent.trim() ===
+                        "THE FIRST VICTORY"
+                    );
+
+                // Prevent duplicate headings
+                if (
+                    el.parentElement.textContent.includes(
+                        "SPOILS OF WAR"
+                    )
+                ) return;
+
+                // Create matching heading
+                const heading = original
+                    ? original.cloneNode(true)
+                    : document.createElement("h3");
+
+                heading.textContent = "SPOILS OF WAR";
+
+                if (!original) {
+                    heading.style.color = "#EAD9BC";
+                    heading.style.fontFamily = "Georgia, serif";
+                    heading.style.fontWeight = "bold";
+                    heading.style.fontSize = "17px";
+                    heading.style.marginBottom = "12px";
+                }
+
+                // Insert above description
+                el.parentElement.insertBefore(heading, el);
+
+                return;
+            }
+        }
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded",
+            fixSpoilsOfWar
+        );
+    } else {
+        fixSpoilsOfWar();
+    }
+
+})();
+</script>
 </body>
 </html>
