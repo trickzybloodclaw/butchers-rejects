@@ -4845,5 +4845,36 @@ body.cinematic-site #gallery .section-title {
     }
 })();
 </script>
+<script>
+/* REMOVE THE WAR DRUMS ECHO */
+
+(function () {
+    function removeWarDrums() {
+        document.querySelectorAll(
+            "p, span, div, h1, h2, h3, h4, h5, h6"
+        ).forEach(function(el) {
+
+            if (
+                el.children.length === 0 &&
+                el.textContent.trim().toUpperCase() ===
+                "THE WAR DRUMS ECHO"
+            ) {
+                el.style.setProperty(
+                    "display", "none", "important"
+                );
+            }
+
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded", removeWarDrums
+        );
+    } else {
+        removeWarDrums();
+    }
+})();
+</script>
 </body>
 </html>
