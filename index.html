@@ -442,6 +442,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
   announcements.insertAdjacentElement("afterend", calendar);
 });
+</script><script>
+/* ONE CALENDAR — DIRECTLY BELOW WAR CRIES */
+(function () {
+  function fixGuildCalendar() {
+    const calendars = [...document.querySelectorAll('section[id="guild-calendar"]')];
+    const announcements = document.getElementById("news");
+
+    if (!announcements || !calendars.length) return;
+
+    // Keep the calendar with the correct guild email, not the placeholder.
+    const calendar = calendars.find(section =>
+      section.querySelector('iframe[src*="thebutchersrejects%40gmail.com"]')
+    ) || calendars[calendars.length - 1];
+
+    // Remove every duplicate.
+    calendars.forEach(section => {
+      if (section !== calendar) section.remove();
+    });
+
+    // Place the remaining calendar immediately after War Cries.
+    announcements.insertAdjacentElement("afterend", calendar);
+  }
+
+  // Run after the page and the earlier calendar scripts have loaded.
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", fixGuildCalendar);
+  } else {
+    fixGuildCalendar();
+  }
+})();
 </script>
 </body>
 </html>
