@@ -4468,5 +4468,78 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 }
 </style>
+<style>
+/* WAR COUNCIL - CLEAN HEADING */
+
+/* Remove long line above the description */
+.war-council-description {
+    border: none !important;
+    border-top: none !important;
+    box-shadow: none !important;
+}
+
+/* Clean, centred description */
+.war-council-description {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 15px !important;
+
+    width: fit-content !important;
+    max-width: 95% !important;
+    margin: 30px auto 40px !important;
+    padding: 0 !important;
+
+    color: #D8B77A !important;
+    font-family: Georgia, serif !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.5px !important;
+    line-height: 1.6 !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+}
+
+/* Matching bronze lines */
+.war-council-description::before,
+.war-council-description::after {
+    content: "" !important;
+    display: block !important;
+    flex: 0 0 45px !important;
+    width: 45px !important;
+    height: 1px !important;
+    border: none !important;
+    transform: none !important;
+}
+
+/* Left line */
+.war-council-description::before {
+    background: linear-gradient(
+        90deg, transparent, #A86A3C
+    ) !important;
+}
+
+/* Right line */
+.war-council-description::after {
+    background: linear-gradient(
+        90deg, #A86A3C, transparent
+    ) !important;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .war-council-description {
+        font-size: 11px !important;
+        letter-spacing: 0.5px !important;
+        gap: 8px !important;
+    }
+
+    .war-council-description::before,
+    .war-council-description::after {
+        flex-basis: 18px !important;
+        width: 18px !important;
+    }
+}
+</style>
 </body>
 </html>
