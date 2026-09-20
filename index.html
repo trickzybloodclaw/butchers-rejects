@@ -3769,5 +3769,19 @@ body.cinematic-site .story > p:not(.eyebrow):not(.lead) {
 
 })();
 </script>
+<script>
+/* RENAME OUR WARBAND TO BENEATH OUR BANNER */
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("a, h1, h2, h3, span, div").forEach(function(el) {
+        if (
+            el.children.length === 0 &&
+            el.textContent.trim().toUpperCase() === "OUR WARBAND"
+        ) {
+            el.textContent = "BENEATH OUR BANNER";
+        }
+    });
+});
+</script>
 </body>
 </html>
