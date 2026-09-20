@@ -167,3 +167,12 @@ button[hidden] {
   transition: none !important;
   pointer-events: none !important;
 }
+
+.embers,
+.ember,
+.fire-embers,
+.fire-particles,
+.spark,
+.sparks {
+  display: none !important;
+}
