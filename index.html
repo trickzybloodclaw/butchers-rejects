@@ -4386,5 +4386,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 }
 </style>
+<script>
+/* REMOVE FROM THE WAR CAMP TEXT */
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("p, span, div").forEach(function(el) {
+        if (
+            el.children.length === 0 &&
+            el.textContent.trim().toUpperCase() === "FROM THE WAR CAMP"
+        ) {
+            el.style.display = "none";
+        }
+    });
+});
+</script>
 </body>
 </html>
