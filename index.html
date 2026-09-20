@@ -4157,5 +4157,73 @@ body.cinematic-site .warband .section-rule {
     }
 }
 </style>
+<style>
+/* CLEAN WAR COUNCIL DESCRIPTION */
+
+.war-council-description {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: fit-content !important;
+    max-width: 95% !important;
+    margin: 30px auto 45px !important;
+    padding: 0 !important;
+    gap: 16px !important;
+
+    color: #D8B77A !important;
+    font-family: Georgia, serif !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px !important;
+    line-height: 1.8 !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* MATCHING SHORT BRONZE LINES */
+
+.war-council-description::before,
+.war-council-description::after {
+    content: "" !important;
+    display: block !important;
+    flex: 0 0 45px !important;
+    width: 45px !important;
+    height: 1px !important;
+    border: none !important;
+    transform: none !important;
+}
+
+.war-council-description::before {
+    background: linear-gradient(
+        90deg, transparent, #A86A3C
+    ) !important;
+}
+
+.war-council-description::after {
+    background: linear-gradient(
+        90deg, #A86A3C, transparent
+    ) !important;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    .war-council-description {
+        font-size: 11px !important;
+        letter-spacing: 1px !important;
+        gap: 8px !important;
+    }
+
+    .war-council-description::before,
+    .war-council-description::after {
+        flex-basis: 18px !important;
+        width: 18px !important;
+    }
+}
+</style>
 </body>
 </html>
