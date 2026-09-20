@@ -1492,3 +1492,30 @@ button[hidden] {
   }
 
 }
+
+/* GUILD CALENDAR — MATCH WEBSITE GOLD */
+
+#calendar h1,
+#calendar h2,
+#guild-calendar h1,
+#guild-calendar h2,
+.calendar-section h1,
+.calendar-section h2 {
+    color: #F2DFC0 !important;
+    -webkit-text-fill-color: #F2DFC0 !important;
+    text-shadow: 0 3px 8px rgba(0,0,0,0.8) !important;
+}
+
+/* Gold calendar subtitle */
+#calendar p,
+#guild-calendar p,
+.calendar-section p {
+    color: #D8C09D !important;
+}
+
+/* Gold calendar frame */
+#calendar iframe,
+#guild-calendar iframe,
+.calendar-section iframe {
+    border: 2px solid #806044 !important;
+}
