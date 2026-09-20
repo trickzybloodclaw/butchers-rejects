@@ -1169,3 +1169,24 @@ button[hidden] {
   }
 
 }
+
+/* MOBILE: FILL THE SCREEN WITH THE PORTRAIT VIDEO */
+@media screen and (max-width: 850px) {
+  .cinematic-site .cinematic-mobile video.mobile-background-video {
+    display: block !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+
+    width: calc(100% + 36px) !important;
+    max-width: none !important;
+    height: auto !important;
+    aspect-ratio: 9 / 16 !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    margin: 0 -18px !important;
+  }
+}
