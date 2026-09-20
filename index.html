@@ -2430,5 +2430,67 @@ body.cinematic-site .ribbon {
 
 </style>
 <!-- END CALENDAR MAKEOVER -->
+  
+<!-- BUTCHERS REJECTS — TWO-TONE CALENDAR TITLE -->
+<style>
+
+/* Match War Cries & Announcements lettering */
+#guild-calendar .war-title {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+
+  color: #f2dfc0 !important;
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-weight: 900 !important;
+  text-shadow: 0 3px 8px rgba(0,0,0,.65) !important;
+  filter: none !important;
+}
+
+/* Cream gold first half */
+#guild-calendar .war-title .war-title-gold {
+  color: #f2dfc0 !important;
+  -webkit-text-fill-color: #f2dfc0 !important;
+}
+
+/* Muted Horde red second half */
+#guild-calendar .war-title .war-title-red {
+  color: #c75a43 !important;A
+  -webkit-text-fill-color: #c75a43 !important;
+}
+
+</style>
+
+<script>
+(function () {
+  function updateCalendarTitle() {
+    const title = document.querySelector(
+      "#guild-calendar .war-title"
+    );
+
+    if (!title) return;
+
+    title.replaceChildren();
+
+    const gold = document.createElement("span");
+    gold.className = "war-title-gold";
+    gold.textContent = "⚔ GUILD WAR ";
+
+    const red = document.createElement("span");
+    red.className = "war-title-red";
+    red.textContent = "CALENDAR ⚔";
+
+    title.append(gold, red);
+  }
+
+  if (document.readyState === "complete") {
+    updateCalendarTitle();
+  } else {
+    window.addEventListener("load", updateCalendarTitle);
+  }
+})();
+</script>
+<!-- END CALENDAR TITLE -->
 </body>
 </html>
