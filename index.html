@@ -3353,5 +3353,421 @@ body.cinematic-site .story > p:not(.eyebrow):not(.lead) {
     text-shadow: 0 2px 5px rgba(0,0,0,0.8) !important;
 }
 </style>
+<!-- BUTCHERS REJECTS: IN-PAGE CALENDAR VIEWS -->
+
+<style>
+/* VIEW DROPDOWN */
+
+#guild-calendar #warViewSelect {
+    appearance: auto !important;
+    background: #1b110c !important;
+    color: #f2dfc0 !important;
+    border: 1px solid #a86a3c !important;
+    border-radius: 4px !important;
+    padding: 12px !important;
+    font: bold 13px Georgia, serif !important;
+    cursor: pointer !important;
+}
+
+#warViewSelect option {
+    background: #1b110c;
+    color: #f2dfc0;
+}
+
+/* WEEK VIEW */
+
+#guild-calendar .war-grid.view-week {
+    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+}
+
+#guild-calendar .war-grid.view-week .war-day {
+    min-height: 240px !important;
+}
+
+/* DAY VIEW */
+
+#guild-calendar .war-grid.view-day {
+    grid-template-columns: 1fr !important;
+}
+
+#guild-calendar .war-grid.view-day .war-day {
+    min-height: 350px !important;
+    padding: 25px !important;
+}
+
+/* EVENT APPEARANCE */
+
+#guild-calendar .view-week .war-event,
+#guild-calendar .view-day .war-event {
+    padding: 12px !important;
+    margin-top: 10px !important;
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+}
+
+/* SELECTABLE DATES */
+
+#guild-calendar .war-date {
+    cursor: pointer;
+}
+
+#guild-calendar .war-date:hover {
+    color: #e3a35d !important;
+}
+
+/* MOBILE */
+
+@media(max-width:768px) {
+
+    #guild-calendar .war-grid.view-week {
+        overflow-x: auto;
+    }
+
+    #guild-calendar .view-week .war-day {
+        min-height: 150px !important;
+        padding: 4px !important;
+    }
+
+    #guild-calendar .view-week .war-event {
+        font-size: 10px !important;
+        padding: 4px !important;
+    }
+
+    #guild-calendar .view-day .war-day {
+        min-height: 250px !important;
+    }
+}
+</style>
+
+<script>
+(function () {
+    "use strict";
+
+    let view = "MONTH";
+    let selectedDate = new Date();
+    let monthNavigation = null;
+    let applying = false;
+
+    const gridId = "warGrid";
+
+    function dateKey(date) {
+        return [
+            date.getFullYear(),
+            String(date.getMonth() + 1).padStart(2, "0"),
+            String(date.getDate()).padStart(2, "0")
+        ].join("-");
+    }
+
+    function addDays(date, amount) {
+        const result = new Date(date);
+        result.setDate(result.getDate() + amount);
+        return result;
+    }
+
+    function getCalendar() {
+        return document.getElementById("guild-calendar");
+    }
+
+    function getDisplayedMonth() {
+        const label = document.getElementById("warMonthLabel");
+        if (!label) return null;
+
+        const date = new Date("1 " + label.textContent.trim());
+        return isNaN(date.getTime()) ? null : date;
+    }
+
+    function getCells() {
+        const grid = document.getElementById(gridId);
+        const month = getDisplayedMonth();
+
+        if (!grid || !month) return [];
+
+        const firstDay = new Date(
+            month.getFullYear(),
+            month.getMonth(),
+            1
+        ).getDay();
+
+        return [...grid.querySelectorAll(".war-day")].map(
+            (cell, index) => ({
+                cell,
+                date: new Date(
+                    month.getFullYear(),
+                    month.getMonth(),
+                    index - firstDay + 1
+                )
+            })
+        );
+    }
+
+    function updateView() {
+        const grid = document.getElementById(gridId);
+        const label = document.getElementById("warMonthLabel");
+
+        if (!grid || !label || applying) return;
+
+        applying = true;
+
+        grid.classList.remove("view-week", "view-day");
+
+        const cells = getCells();
+
+        const weekdays = grid.querySelectorAll(".war-weekday");
+
+        const month = getDisplayedMonth();
+
+        if (view === "MONTH") {
+            weekdays.forEach(day => {
+                day.style.display = "";
+            });
+
+            cells.forEach(({cell}) => {
+                cell.style.display = "";
+            });
+
+            applying = false;
+            return;
+        }
+
+        const selected = dateKey(selectedDate);
+
+        const weekStart = new Date(selectedDate);
+        weekStart.setDate(
+            weekStart.getDate() - weekStart.getDay()
+        );
+
+        const weekEnd = addDays(weekStart, 6);
+
+        if (view === "WEEK") {
+            grid.classList.add("view-week");
+
+            weekdays.forEach(day => {
+                day.style.display = "";
+            });
+
+            cells.forEach(({cell, date}) => {
+                cell.style.display =
+                    date >= weekStart && date <= weekEnd
+                        ? ""
+                        : "none";
+            });
+
+            label.textContent =
+                weekStart.toLocaleDateString("en-CA", {
+                    month: "short",
+                    day: "numeric"
+                }) +
+                " – " +
+                weekEnd.toLocaleDateString("en-CA", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric"
+                });
+        }
+
+        if (view === "DAY") {
+            grid.classList.add("view-day");
+
+            weekdays.forEach(day => {
+                day.style.display = "none";
+            });
+
+            cells.forEach(({cell, date}) => {
+                cell.style.display =
+                    dateKey(date) === selected
+                        ? ""
+                        : "none";
+            });
+
+            label.textContent =
+                selectedDate.toLocaleDateString("en-CA", {
+                    weekday: "long",
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric"
+                });
+        }
+
+        applying = false;
+    }
+
+    function restoreMonthLabel() {
+        const label = document.getElementById("warMonthLabel");
+        const grid = document.getElementById(gridId);
+
+        if (!label || !grid) return;
+
+        /* Store the real month separately so filtering
+           never confuses the existing calendar renderer. */
+
+        if (grid.dataset.realMonth) {
+            label.textContent = grid.dataset.realMonth;
+        }
+    }
+
+    function navigate(amount) {
+        selectedDate = addDays(
+            selectedDate,
+            view === "WEEK" ? amount * 7 : amount
+        );
+
+        const month = getDisplayedMonth();
+
+        if (!month) return;
+
+        if (
+            selectedDate.getFullYear() !== month.getFullYear() ||
+            selectedDate.getMonth() !== month.getMonth()
+        ) {
+            const button = document.getElementById(
+                amount > 0 ? "warNext" : "warPrev"
+            );
+
+            if (button) {
+                monthNavigation = true;
+                restoreMonthLabel();
+                button.click();
+                monthNavigation = false;
+            }
+        }
+
+        updateView();
+    }
+
+    function install() {
+        const calendar = getCalendar();
+        const grid = document.getElementById(gridId);
+
+        if (!calendar || !grid) return false;
+
+        if (calendar.dataset.viewsInstalled) return true;
+
+        calendar.dataset.viewsInstalled = "true";
+
+        const controls =
+            calendar.querySelectorAll(".war-toolbar .war-controls");
+
+        if (!controls.length) return false;
+
+        const container = controls[controls.length - 1];
+
+        container.innerHTML = `
+            <select id="warViewSelect"
+                    aria-label="Calendar view">
+                <option value="MONTH">MONTH</option>
+                <option value="WEEK">WEEK</option>
+                <option value="DAY">DAY</option>
+            </select>
+        `;
+
+        const select =
+            document.getElementById("warViewSelect");
+
+        select.addEventListener("change", function () {
+            restoreMonthLabel();
+
+            view = this.value;
+
+            updateView();
+        });
+
+        /* Clicking a date opens that day */
+
+        grid.addEventListener("click", function (event) {
+            const dateElement = event.target.closest(".war-date");
+
+            if (!dateElement) return;
+
+            const cells = getCells();
+
+            const match = cells.find(
+                item => item.cell.contains(dateElement)
+            );
+
+            if (!match) return;
+
+            selectedDate = match.date;
+
+            restoreMonthLabel();
+
+            view = "DAY";
+            select.value = "DAY";
+
+            updateView();
+        });
+
+        /* Week and day arrow navigation */
+
+        ["warPrev", "warNext"].forEach(id => {
+            const button = document.getElementById(id);
+
+            if (!button) return;
+
+            button.addEventListener("click", function (event) {
+                if (view === "MONTH" || monthNavigation) return;
+
+                event.preventDefault();
+                event.stopImmediatePropagation();
+
+                navigate(id === "warNext" ? 1 : -1);
+            }, true);
+        });
+
+        /* Today button */
+
+        const today = document.getElementById("warToday");
+
+        if (today) {
+            today.addEventListener("click", function () {
+                selectedDate = new Date();
+                view = "MONTH";
+                select.value = "MONTH";
+            }, true);
+        }
+
+        /* Reapply view when Google events reload */
+
+        const observer = new MutationObserver(function () {
+            if (applying) return;
+
+            const currentGrid = document.getElementById(gridId);
+
+            if (!currentGrid) return;
+
+            const label = document.getElementById("warMonthLabel");
+
+            if (label && view === "MONTH") {
+                currentGrid.dataset.realMonth = label.textContent;
+            }
+
+            updateView();
+        });
+
+        observer.observe(grid, {
+            childList: true
+        });
+
+        grid.dataset.realMonth =
+            document.getElementById("warMonthLabel").textContent;
+
+        updateView();
+
+        return true;
+    }
+
+    /* Wait for your existing custom calendar to install */
+
+    window.addEventListener("load", function () {
+        const timer = setInterval(function () {
+            if (install()) clearInterval(timer);
+        }, 100);
+
+        setTimeout(function () {
+            clearInterval(timer);
+        }, 10000);
+    });
+
+})();
+</script>
 </body>
 </html>
