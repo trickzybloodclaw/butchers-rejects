@@ -4568,5 +4568,93 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 })();
 </script>
+<style>
+/* WAR COUNCIL — FINAL CLEANUP */
+
+/* Remove the long bronze bar */
+body.cinematic-site #roster > .lead {
+    border: 0 !important;
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+    background-image: none !important;
+
+    /* Centre the description */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: fit-content !important;
+    max-width: 95% !important;
+    margin: 25px auto 40px !important;
+    padding: 0 !important;
+    gap: 16px !important;
+
+    color: #E8D7B5 !important;
+    font-family: Georgia, serif !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.5px !important;
+    line-height: 1.7 !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+}
+
+/* Two identical short bronze lines */
+body.cinematic-site #roster > .lead::before,
+body.cinematic-site #roster > .lead::after {
+    content: "" !important;
+    display: block !important;
+    position: static !important;
+
+    flex: 0 0 45px !important;
+    width: 45px !important;
+    min-width: 45px !important;
+    max-width: 45px !important;
+    height: 1px !important;
+
+    border: 0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+}
+
+/* Left bronze line */
+body.cinematic-site #roster > .lead::before {
+    background: linear-gradient(
+        90deg, transparent, #A86A3C
+    ) !important;
+}
+
+/* Right bronze line */
+body.cinematic-site #roster > .lead::after {
+    background: linear-gradient(
+        90deg, #A86A3C, transparent
+    ) !important;
+}
+
+/* Hide any separate divider directly in the roster */
+body.cinematic-site #roster > hr,
+body.cinematic-site #roster > .section-rule {
+    display: none !important;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+    body.cinematic-site #roster > .lead {
+        font-size: 11px !important;
+        letter-spacing: 0.5px !important;
+        gap: 8px !important;
+    }
+
+    body.cinematic-site #roster > .lead::before,
+    body.cinematic-site #roster > .lead::after {
+        flex-basis: 18px !important;
+        width: 18px !important;
+        min-width: 18px !important;
+        max-width: 18px !important;
+    }
+}
+</style>
 </body>
 </html>
