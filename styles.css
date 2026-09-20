@@ -1190,3 +1190,45 @@ button[hidden] {
     margin: 0 -18px !important;
   }
 }
+
+/* SMOKY BATTLEFIELD — WEBSITE SECTIONS ONLY */
+@media (min-width: 851px) {
+
+  body.cinematic-site {
+    background:
+      radial-gradient(
+        ellipse at 12% 35%,
+        rgba(155, 35, 20, 0.22),
+        transparent 42%
+      ),
+      radial-gradient(
+        ellipse at 88% 70%,
+        rgba(120, 25, 15, 0.20),
+        transparent 45%
+      ),
+      linear-gradient(
+        135deg,
+        #100d0b 0%,
+        #21120f 45%,
+        #100d0b 100%
+      );
+    background-attachment: scroll;
+  }
+
+  /* Show battlefield background behind content */
+  .cinematic-site .story,
+  .cinematic-site .recruit,
+  .cinematic-site #roster,
+  .cinematic-site #gallery {
+    background: transparent !important;
+  }
+
+  /* Keep recruitment form readable */
+  .cinematic-site .panel,
+  .cinematic-site .tile,
+  .cinematic-site .member,
+  .cinematic-site .gallery-card {
+    background: rgba(24, 16, 13, 0.88);
+    backdrop-filter: blur(5px);
+  }
+}
