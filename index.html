@@ -2441,5 +2441,27 @@ body.cinematic-site #guild-calendar .war-frame::before {
   pointer-events: none;
 }
 </style>
+<style>
+/* BRONZE EXTERIOR FRAME ONLY */
+
+#guild-calendar .war-frame {
+  border: 3px solid #b87940 !important;
+  border-radius: 4px !important;
+
+  box-shadow:
+    0 0 0 2px #21120a,
+    0 0 0 4px #8c502b,
+    0 0 0 5px #d49a58,
+    0 12px 35px rgba(0,0,0,0.7) !important;
+}
+
+/* Remove decorative overlays */
+#guild-calendar .war-frame::before,
+#guild-calendar .war-frame::after {
+  content: none !important;
+}
+
+/* Keep the interior untouched */
+</style>
 </body>
 </html>
