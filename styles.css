@@ -1427,7 +1427,7 @@ button[hidden] {
   body.cinematic-site #guild-calendar > div {
     background: #111 !important;
   }
-}/* DARK IRON & GOLD RIBBON — MOBILE ONLY */
+}/* DARK IRON & ORANGE RIBBON — MOBILE ONLY */
 @media (max-width: 850px) {
   body.cinematic-site .ribbon {
     position: relative;
